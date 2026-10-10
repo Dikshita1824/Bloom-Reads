@@ -1,0 +1,325 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Books - Bloom Reads</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="bg-[#FFF9F5] text-[#492632]">
+
+    <%- include('includes/nav.ejs') %>
+
+    <%
+        const defaultBooks = [
+            {
+                title: "The Great Gatsby",
+                author: "F. Scott Fitzgerald",
+                price: 299,
+                category: "Classic",
+                image: "https://covers.openlibrary.org/b/title/The%20Great%20Gatsby-L.jpg"
+            },
+            {
+                title: "Pride and Prejudice",
+                author: "Jane Austen",
+                price: 349,
+                category: "Romance",
+                image: "https://covers.openlibrary.org/b/title/Pride%20and%20Prejudice-L.jpg"
+            },
+            {
+                title: "Harry Potter and the Philosopher's Stone",
+                author: "J. K. Rowling",
+                price: 499,
+                category: "Fantasy",
+                image: "https://covers.openlibrary.org/b/title/Harry%20Potter%20and%20the%20Philosophers%20Stone-L.jpg"
+            },
+            {
+                title: "The Hobbit",
+                author: "J. R. R. Tolkien",
+                price: 399,
+                category: "Fantasy",
+                image: "https://covers.openlibrary.org/b/title/The%20Hobbit-L.jpg"
+            },
+            {
+                title: "Murder on the Orient Express",
+                author: "Agatha Christie",
+                price: 329,
+                category: "Mystery",
+                image: "https://covers.openlibrary.org/b/title/Murder%20on%20the%20Orient%20Express-L.jpg"
+            },
+            {
+                title: "The Alchemist",
+                author: "Paulo Coelho",
+                price: 279,
+                category: "Fiction",
+                image: "https://covers.openlibrary.org/b/title/The%20Alchemist-L.jpg"
+            },
+            {
+                title: "To Kill a Mockingbird",
+                author: "Harper Lee",
+                price: 359,
+                category: "Classic",
+                image: "https://covers.openlibrary.org/b/title/To%20Kill%20a%20Mockingbird-L.jpg"
+            },
+            {
+                title: "The Fault in Our Stars",
+                author: "John Green",
+                price: 299,
+                category: "Romance",
+                image: "https://covers.openlibrary.org/b/title/The%20Fault%20in%20Our%20Stars-L.jpg"
+            },
+            {
+                title: "The Complete Sherlock Holmes",
+                author: "Arthur Conan Doyle",
+                price: 449,
+                category: "Mystery",
+                image: "https://covers.openlibrary.org/b/title/The%20Complete%20Sherlock%20Holmes-L.jpg"
+            },
+            {
+                title: "Atomic Habits",
+                author: "James Clear",
+                price: 499,
+                category: "Self-Help",
+                image: "https://covers.openlibrary.org/b/title/Atomic%20Habits-L.jpg"
+            },
+            {
+                title: "The Power of Your Subconscious Mind",
+                author: "Joseph Murphy",
+                price: 249,
+                category: "Self-Help",
+                image: "https://covers.openlibrary.org/b/title/The%20Power%20of%20Your%20Subconscious%20Mind-L.jpg"
+            },
+            {
+                title: "The Little Prince",
+                author: "Antoine de Saint-Exupéry",
+                price: 229,
+                category: "Fiction",
+                image: "https://covers.openlibrary.org/b/title/The%20Little%20Prince-L.jpg"
+            }
+        ];
+
+        const displayBooks = (typeof books !== 'undefined' && books.length > 0)
+            ? books
+            : defaultBooks;
+    %>
+
+    <!-- ADMIN CONTROLS -->
+
+    <% if (isAdmin) { %>
+
+        <div class="max-w-7xl mx-auto px-6 flex justify-end gap-3 mt-6">
+
+            <a href="/books/new"
+               class="bg-[#641E36] text-[#FFF9F5]
+                      px-5 py-3 rounded-lg
+                      uppercase tracking-wider text-sm
+                      hover:bg-[#A04460]
+                      transition duration-300">
+                + Add Book
+            </a>
+
+            <a href="/admin/logout"
+               class="border border-[#641E36]
+                      text-[#641E36]
+                      px-5 py-3 rounded-lg
+                      uppercase tracking-wider text-sm
+                      hover:bg-[#641E36] hover:text-white
+                      transition duration-300">
+                Logout
+            </a>
+
+        </div>
+
+    <% } %>
+
+    <!-- BOOK COLLECTION -->
+
+    <section class="px-6 py-16">
+
+        <div class="max-w-7xl mx-auto">
+
+            <!-- HEADING -->
+
+            <div class="mb-5">
+
+                <p class="text-center text-[#A04460]
+                          uppercase tracking-[0.3em]
+                          text-sm mb-4">
+                    Discover Your Next Favourite
+                </p>
+
+                <h1 class="text-center font-serif
+                           text-5xl md:text-6xl
+                           text-[#641E36]">
+                    Our Books
+                </h1>
+
+                <p class="text-center text-[#A77C87] mt-5 max-w-2xl mx-auto">
+                    Every book opens a new world.
+                    Find your next beautiful read at Bloom Reads.
+                </p>
+
+            </div>
+
+            <!-- DECORATIVE LINE -->
+
+            <div class="flex items-center justify-center gap-3 mb-14">
+
+                <span class="h-px w-20 bg-[#F5D4D8]"></span>
+
+                <span class="text-[#A04460]">✦</span>
+
+                <span class="h-px w-20 bg-[#F5D4D8]"></span>
+
+            </div>
+
+            <!-- BOOK GRID -->
+
+            <main class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <% displayBooks.forEach(book => { %>
+
+                    <!-- BOOK CARD -->
+
+                    <div class="bg-white rounded-2xl overflow-hidden
+                                border border-[#F5D4D8]
+                                shadow-sm hover:shadow-xl
+                                hover:-translate-y-1
+                                transition duration-300">
+
+                        <!-- TOP STRIP -->
+
+                        <div class="h-2 bg-[#A04460]"></div>
+
+                        <div class="p-6">
+
+                            <!-- BOOK IMAGE -->
+
+                            <div class="bg-[#FBE8DF] rounded-xl
+                                        flex items-center justify-center
+                                        overflow-hidden mb-6">
+
+                                <img
+                                    src="<%= book.image %>"
+                                    alt="<%= book.title %>"
+                                    loading="lazy"
+                                    class="w-full h-64 object-contain
+                                           hover:scale-105 transition duration-300"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/400x550/FBE8DF/641E36?text=Bloom+Reads';">
+
+                            </div>
+
+                            <!-- CATEGORY -->
+
+                            <p class="text-[#A04460] text-xs uppercase
+                                      tracking-[0.2em] mb-3">
+                                <%= book.category %>
+                            </p>
+
+                            <!-- TITLE -->
+
+                            <h2 class="font-serif text-2xl
+                                       text-[#641E36] mb-3">
+                                <%= book.title %>
+                            </h2>
+
+                            <!-- BOOK DETAILS -->
+
+                            <div class="space-y-3 text-sm">
+
+                                <p class="text-[#A77C87]">
+                                    <span class="text-[#492632] font-semibold">
+                                        Author
+                                    </span>
+                                    <br>
+                                    <%= book.author %>
+                                </p>
+
+                                <p class="text-[#A77C87]">
+                                    <span class="text-[#492632] font-semibold">
+                                        Price
+                                    </span>
+                                    <br>
+                                    <span class="text-[#641E36] font-bold text-lg">
+                                        ₹<%= book.price %>
+                                    </span>
+                                </p>
+
+                            </div>
+
+                            <!-- AVAILABILITY + ADMIN BUTTONS -->
+
+                            <div class="mt-6 pt-5 border-t border-[#F5D4D8]">
+
+                                <span class="text-[#A04460] text-xs
+                                             uppercase tracking-widest">
+                                    ✦ Available in Collection
+                                </span>
+
+                                <% if (isAdmin && book._id) { %>
+
+                                    <div class="flex gap-3 mt-5">
+
+                                        <!-- EDIT BUTTON -->
+
+                                        <a
+                                            href="/books/edit/<%= book._id %>"
+                                            class="px-4 py-2 rounded-lg
+                                                   border border-[#A04460]
+                                                   text-[#641E36] text-xs
+                                                   uppercase tracking-widest
+                                                   hover:bg-[#F5D4D8]
+                                                   transition duration-300">
+                                            Edit
+                                        </a>
+
+                                        <!-- DELETE BUTTON -->
+
+                                        <form
+                                            action="/books/delete/<%= book._id %>"
+                                            method="POST">
+
+                                            <button
+                                                type="submit"
+                                                onclick="return confirm('Are you sure you want to delete this book?')"
+                                                class="px-4 py-2 rounded-lg
+                                                       bg-[#641E36]
+                                                       text-white text-xs
+                                                       uppercase tracking-widest
+                                                       hover:bg-[#A04460]
+                                                       transition duration-300">
+                                                Delete
+                                            </button>
+
+                                        </form>
+
+                                    </div>
+
+                                <% } %>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                <% }) %>
+
+            </main>
+
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+
+    <%- include('includes/footer.ejs') %>
+
+</body>
+</html>
+

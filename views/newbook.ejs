@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add Book | Bloom Reads</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #fffaf6;
+            color: #492632;
+        }
+
+        h1,
+        h2 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .main-container {
+            max-width: 1250px;
+            margin: 0 auto;
+            padding: 45px 35px;
+        }
+
+        .addbook-layout {
+            display: grid;
+            grid-template-columns: 0.85fr 1.15fr;
+            background: white;
+            border: 1px solid #f1dfe0;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(100, 30, 54, 0.06);
+        }
+
+        .intro-panel {
+            background: #f9e5dc;
+            padding: 45px 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .intro-icon {
+            width: 65px;
+            height: 65px;
+            border-radius: 15px;
+            background: #fffaf6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin-bottom: 25px;
+        }
+
+        .book-decoration {
+            background: #fffaf6;
+            border-radius: 14px;
+            padding: 25px;
+            margin-top: 35px;
+            border: 1px solid #f1d5d0;
+        }
+
+        .book-line {
+            height: 9px;
+            background: #f0d0d0;
+            border-radius: 10px;
+            margin-bottom: 12px;
+        }
+
+        .form-panel {
+            padding: 42px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 14px;
+            background: #fffaf8;
+            border: 1px solid #ead7d9;
+            border-radius: 8px;
+            outline: none;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .form-input:focus {
+            border-color: #a04460;
+            box-shadow: 0 0 0 3px rgba(160, 68, 96, 0.10);
+        }
+
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #641e36;
+            margin-bottom: 8px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: #641e36;
+            color: white;
+            padding: 13px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        .submit-btn:hover {
+            background: #853650;
+            transform: translateY(-1px);
+        }
+
+        .cancel-btn {
+            display: inline-block;
+            color: #8c5366;
+            font-size: 13px;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .cancel-btn:hover {
+            color: #641e36;
+        }
+
+        .upload-box {
+            border: 1px dashed #d9b8c0;
+            border-radius: 9px;
+            padding: 15px;
+            background: #fffaf8;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            font-size: 12px;
+            color: #76535d;
+        }
+
+        input[type="file"]::file-selector-button {
+            background: #f5dce0;
+            color: #641e36;
+            border: none;
+            padding: 9px 12px;
+            border-radius: 6px;
+            margin-right: 12px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 800px) {
+            .main-container {
+                padding: 30px 20px;
+            }
+
+            .addbook-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .intro-panel {
+                padding: 30px;
+            }
+
+            .book-decoration {
+                display: none;
+            }
+
+            .form-panel {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-container {
+                padding: 20px 12px;
+            }
+
+            .intro-panel,
+            .form-panel {
+                padding: 24px 20px;
+            }
+
+            .intro-panel h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <%- include('includes/nav.ejs') %>
+
+    <main class="main-container">
+
+        <!-- Page Heading -->
+        <div class="mb-7">
+            <p class="text-xs uppercase tracking-[3px] text-[#A04460] mb-2">
+                Bloom Reads / Collection
+            </p>
+
+            <h1 class="text-3xl md:text-4xl font-bold text-[#641E36]">
+                Add a New Book
+            </h1>
+
+            <p class="text-sm text-[#947680] mt-2">
+                Fill in the details below to add a book to your collection.
+            </p>
+        </div>
+
+        <!-- Main Layout -->
+        <div class="addbook-layout">
+
+            <!-- Left Introduction Panel -->
+            <div class="intro-panel">
+
+                <div>
+                    <div class="intro-icon">
+                        📚
+                    </div>
+
+                    <p class="text-xs uppercase tracking-[2px] text-[#A04460] mb-3">
+                        Grow Your Library
+                    </p>
+
+                    <h2 class="text-4xl font-semibold leading-tight text-[#641E36]">
+                        Every book has a story.
+                    </h2>
+
+                    <p class="text-sm text-[#805D66] leading-7 mt-5">
+                        Add your favourite books to Bloom Reads and
+                        make them available for readers to discover.
+                        A few details are all you need to get started.
+                    </p>
+                </div>
+
+                <!-- Simple Decoration -->
+                <div class="book-decoration">
+
+                    <p class="text-sm font-semibold text-[#641E36] mb-4">
+                        A little reading inspiration
+                    </p>
+
+                    <div class="flex gap-3 items-start">
+                        <div class="text-2xl">🌷</div>
+
+                        <div>
+                            <p class="text-sm font-semibold text-[#641E36]">
+                                One book at a time
+                            </p>
+
+                            <p class="text-xs text-[#947680] mt-1 leading-5">
+                                Add stories, share knowledge and
+                                keep your collection growing.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <div class="book-line" style="width: 90%;"></div>
+                        <div class="book-line" style="width: 70%;"></div>
+                        <div class="book-line" style="width: 80%;"></div>
+                    </div>
+
+                </div>
+
+                <p class="text-xs text-[#946D77] mt-7">
+                    Made with love for book lovers. ♡
+                </p>
+
+            </div>
+
+            <!-- Right Form Panel -->
+            <div class="form-panel">
+
+                <div class="mb-7">
+                    <h2 class="text-2xl font-semibold text-[#641E36]">
+                        Book Details
+                    </h2>
+
+                    <p class="text-xs text-[#947680] mt-2">
+                        Enter the information for your new book.
+                    </p>
+                </div>
+
+                <form
+                    action="/books"
+                    method="POST"
+                    enctype="multipart/form-data"
+                >
+
+                    <!-- Book Title -->
+                    <div class="mb-5">
+                        <label for="title" class="form-label">
+                            Book Title <span class="text-[#A04460]">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="title"
+                            name="title"
+                            placeholder="e.g. The Secret Garden"
+                            class="form-input"
+                            required
+                        >
+                    </div>
+
+                    <!-- Author -->
+                    <div class="mb-5">
+                        <label for="author" class="form-label">
+                            Author Name <span class="text-[#A04460]">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="author"
+                            name="author"
+                            placeholder="Enter author's name"
+                            class="form-input"
+                            required
+                        >
+                    </div>
+
+                    <!-- Price and Category -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
+
+                        <div>
+                            <label for="price" class="form-label">
+                                Price (₹) <span class="text-[#A04460]">*</span>
+                            </label>
+
+                            <input
+                                type="number"
+                                id="price"
+                                name="price"
+                                placeholder="e.g. 299"
+                                min="0"
+                                step="0.01"
+                                class="form-input"
+                                required
+                            >
+                        </div>
+
+                        <div>
+                            <label for="category" class="form-label">
+                                Category <span class="text-[#A04460]">*</span>
+                            </label>
+
+                            <select
+                                id="category"
+                                name="category"
+                                class="form-input"
+                                required
+                            >
+                                <option value="" disabled selected>
+                                    Select category
+                                </option>
+
+                                <option value="Fiction">Fiction</option>
+                                <option value="Romance">Romance</option>
+                                <option value="Mystery">Mystery</option>
+                                <option value="Fantasy">Fantasy</option>
+                                <option value="Classic">Classic</option>
+                                <option value="Self-Help">Self-Help</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <!-- Book Cover -->
+                    <div class="mb-7">
+
+                        <label for="img" class="form-label">
+                            Book Cover Image
+                            <span class="text-[#A04460]">*</span>
+                        </label>
+
+                        <div class="upload-box">
+                            <input
+                                type="file"
+                                id="img"
+                                name="img"
+                                accept="image/*"
+                                required
+                            >
+
+                            <p class="text-xs text-[#947680] mt-3">
+                                Choose an image from your device.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="submit-btn">
+                        + Add Book to Collection
+                    </button>
+
+                    <!-- Cancel Link -->
+                    <div class="text-center mt-5">
+                        <a href="/books" class="cancel-btn">
+                            ← Cancel and go back to books
+                        </a>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <%- include('includes/footer.ejs') %>
+
+</body>
+
+</html>

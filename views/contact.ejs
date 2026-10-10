@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Bloom Reads</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        h1, h2 {
+            font-family: 'Cormorant Garamond', serif;
+        }
+    </style>
+</head>
+
+<body class="bg-[#FFF9F5] text-[#492632]">
+
+    <!-- Navbar -->
+    <%- include('includes/nav.ejs') %>
+
+    <!-- Contact Section -->
+    <section class="min-h-screen px-5 py-12">
+
+        <!-- Heading -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#641E36]">
+                Get in Touch
+            </h1>
+
+            <div class="w-16 h-1 bg-[#A04460] rounded-full mx-auto mt-3"></div>
+
+            <p class="text-[#A77C87] mt-4 text-sm md:text-base">
+                Have a question? We'd love to hear from you.
+            </p>
+        </div>
+
+        <!-- Contact Form Box -->
+        <div class="max-w-xl mx-auto bg-[#FBE8DF] border border-[#F5D4D8] rounded-2xl shadow-md p-6 md:p-8">
+
+            <h2 class="text-2xl font-semibold text-[#641E36] mb-2">
+                Send Us a Message
+            </h2>
+
+            <p class="text-sm text-[#A77C87] mb-6">
+                Fill in the details below and we'll get back to you.
+            </p>
+
+            <form action="/contact" method="POST" class="space-y-5">
+
+                <!-- Name -->
+                <div>
+                    <label for="name" class="block text-sm font-medium mb-2">
+                        Your Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter your name"
+                        required
+                        class="w-full px-4 py-3 rounded-lg border border-[#E8C5CD] bg-[#FFF9F5] focus:outline-none focus:ring-2 focus:ring-[#A04460]"
+                    >
+                </div>
+
+                <!-- Email -->
+                <div>
+                    <label for="email" class="block text-sm font-medium mb-2">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required
+                        class="w-full px-4 py-3 rounded-lg border border-[#E8C5CD] bg-[#FFF9F5] focus:outline-none focus:ring-2 focus:ring-[#A04460]"
+                    >
+                </div>
+
+                <!-- Mobile -->
+                <div>
+                    <label for="mobile" class="block text-sm font-medium mb-2">
+                        Mobile Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="mobile"
+                        name="mobile"
+                        placeholder="Enter your mobile number"
+                        class="w-full px-4 py-3 rounded-lg border border-[#E8C5CD] bg-[#FFF9F5] focus:outline-none focus:ring-2 focus:ring-[#A04460]"
+                    >
+                </div>
+
+                <!-- Message -->
+                <div>
+                    <label for="message" class="block text-sm font-medium mb-2">
+                        Your Message
+                    </label>
+
+                    <textarea
+                        id="message"
+                        name="message"
+                        rows="4"
+                        placeholder="Write your message here..."
+                        required
+                        class="w-full px-4 py-3 rounded-lg border border-[#E8C5CD] bg-[#FFF9F5] focus:outline-none focus:ring-2 focus:ring-[#A04460] resize-none"
+                    ></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <button
+                    type="submit"
+                    class="w-full bg-[#641E36] text-white py-3 rounded-lg font-medium hover:bg-[#A04460] transition duration-300"
+                >
+                    Send Message
+                </button>
+
+            </form>
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <%- include('includes/footer.ejs') %>
+
+</body>
+</html>
+

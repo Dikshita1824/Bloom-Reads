@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>About | Bloom Reads</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="bg-[#fff8f3] text-[#450920]">
+
+    <%- include('includes/nav.ejs') %>
+
+    <!-- COMPACT ABOUT INTRO -->
+    <section class="relative overflow-hidden px-6 py-14 md:py-16">
+        <div class="absolute -top-16 -right-12 h-52 w-52 rounded-full bg-[#ffa5ab]/30 blur-3xl"></div>
+        <div class="absolute bottom-0 -left-12 h-44 w-44 rounded-full bg-[#f9dbbd]/70 blur-3xl"></div>
+
+        <div class="relative mx-auto max-w-4xl text-center">
+            <p class="mb-4 text-xs font-bold uppercase tracking-[0.35em] text-[#a53860]">
+                A little about our pages
+            </p>
+
+            <h1 class="font-display text-4xl leading-tight md:text-6xl">
+                Every reader deserves a
+                <span class="italic text-[#a53860]">happy place.</span>
+            </h1>
+
+            <div class="my-6 flex items-center justify-center gap-3">
+                <span class="h-px w-14 bg-[#ffa5ab]"></span>
+                <span class="text-[#a53860]" aria-hidden="true">✿</span>
+                <span class="h-px w-14 bg-[#ffa5ab]"></span>
+            </div>
+
+            <p class="mx-auto max-w-2xl text-sm leading-7 text-[#450920]/75 md:text-base">
+                Welcome to Bloom Reads — a cosy corner for curious minds, big feelings
+                and stories that stay with you long after the last page.
+            </p>
+
+            <p class="mx-auto mt-3 max-w-2xl text-sm leading-7 text-[#450920]/70 md:text-base">
+                Find a new adventure, discover an inspiring idea or simply enjoy a quiet
+                moment with a book that feels right for you.
+            </p>
+
+            <a href="/books"
+               class="mt-6 inline-flex items-center gap-3 rounded-full bg-[#450920] px-7 py-3 text-sm font-semibold text-[#f9dbbd] shadow-md transition duration-300 hover:-translate-y-1 hover:bg-[#a53860]">
+                Explore the collection <span aria-hidden="true">→</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- OUR STORY -->
+    <section class="px-6 py-10 md:py-12">
+        <div class="mx-auto max-w-4xl rounded-3xl border border-[#a53860]/15 bg-white px-6 py-8 shadow-sm md:px-12 md:py-10">
+            <div class="mb-5 text-center">
+                <p class="mb-3 text-xs font-bold uppercase tracking-[0.3em] text-[#a53860]">
+                    The story behind Bloom Reads
+                </p>
+
+                <h2 class="font-display text-3xl md:text-4xl">
+                    More than books. <span class="italic text-[#a53860]">Little worlds.</span>
+                </h2>
+            </div>
+
+            <p class="mb-5 text-center font-display text-xl italic leading-relaxed text-[#a53860] md:text-2xl">
+                “Sometimes, the right story finds us exactly when we need it.”
+            </p>
+
+            <div class="space-y-4 text-sm leading-7 text-[#450920]/75 md:text-base">
+                <p>
+                    Bloom Reads is a welcoming space for every kind of reader — from
+                    people who love getting lost in fiction to those who enjoy learning
+                    something new with every chapter.
+                </p>
+
+                <p>
+                    Our shelves bring together adventures, thoughtful ideas, mysteries,
+                    fantasy, science and inspiring real-life stories. Every category offers
+                    a different path to explore, discover and grow.
+                </p>
+
+                <p>
+                    Take your time, follow your curiosity and choose the book that speaks
+                    to you. Reading is not a race; it is a lovely way to make room for
+                    wonder in everyday life.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHAT WE LOVE -->
+    <section class="bg-[#f9dbbd]/65 px-6 py-12 md:py-14">
+        <div class="mx-auto max-w-6xl">
+            <div class="mx-auto mb-8 max-w-2xl text-center">
+                <p class="mb-3 text-xs font-bold uppercase tracking-[0.3em] text-[#a53860]">
+                    Our reading philosophy
+                </p>
+
+                <h2 class="font-display text-3xl md:text-4xl">
+                    A book for every <span class="italic text-[#a53860]">kind of mood.</span>
+                </h2>
+
+                <p class="mt-3 text-sm leading-7 text-[#450920]/70 md:text-base">
+                    However you like to read, there is always another page waiting to surprise you.
+                </p>
+            </div>
+
+            <div class="grid gap-5 md:grid-cols-3">
+                <article class="rounded-2xl border border-white/80 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1">
+                    <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#ffa5ab]/35 text-2xl" aria-hidden="true">✦</div>
+                    <h3 class="font-display text-xl md:text-2xl">Follow your curiosity</h3>
+                    <p class="mt-2 text-sm leading-6 text-[#450920]/70">
+                        Explore new subjects, fresh ideas and stories that open up a different point of view.
+                    </p>
+                </article>
+
+                <article class="rounded-2xl border border-white/80 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1">
+                    <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#f9dbbd] text-2xl" aria-hidden="true">♡</div>
+                    <h3 class="font-display text-xl md:text-2xl">Find your feeling</h3>
+                    <p class="mt-2 text-sm leading-6 text-[#450920]/70">
+                        Choose a comforting read, an exciting mystery or a magical escape for the day.
+                    </p>
+                </article>
+
+                <article class="rounded-2xl border border-white/80 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1">
+                    <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#a53860]/15 text-2xl" aria-hidden="true">❀</div>
+                    <h3 class="font-display text-xl md:text-2xl">Grow one page at a time</h3>
+                    <p class="mt-2 text-sm leading-6 text-[#450920]/70">
+                        Let each book leave you with a new thought, a new question or a little inspiration.
+                    </p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- CLOSING CTA -->
+    <section class="px-6 py-12 md:py-14">
+        <div class="mx-auto max-w-4xl rounded-3xl bg-[#450920] px-6 py-10 text-center text-white shadow-lg md:px-12">
+            <p class="mb-3 text-xs font-bold uppercase tracking-[0.3em] text-[#ffa5ab]">
+                Your next chapter is waiting
+            </p>
+
+            <h2 class="font-display text-3xl md:text-4xl">
+                Ready to find your next favourite?
+            </h2>
+
+            <p class="mx-auto mt-4 max-w-xl text-sm leading-7 text-white/75 md:text-base">
+                Browse the shelves, discover a new category and let a good story find you.
+            </p>
+
+            <a href="/books"
+               class="mt-6 inline-flex rounded-full bg-[#f9dbbd] px-7 py-3 text-sm font-bold text-[#450920] transition duration-300 hover:bg-[#ffa5ab]">
+                Browse books
+            </a>
+        </div>
+    </section>
+
+    <%- include('includes/footer.ejs') %>
+
+</body>
+</html>

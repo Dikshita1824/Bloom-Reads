@@ -1,0 +1,75 @@
+
+<nav class="bg-[#641E36] text-[#FFF9F5] px-5 md:px-8 py-4 shadow-md border-b border-[#F5D4D8]/30">
+
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+
+        <!-- LOGO -->
+        <a href="/"
+           class="group flex items-center gap-2 no-underline">
+
+            <span class="text-[#F5D4D8] text-xl group-hover:rotate-12 transition duration-300">
+                ❀
+            </span>
+
+            <span class="text-[27px] font-semibold tracking-wide text-[#FFF9F5] group-hover:text-[#F5D4D8] transition duration-300"
+                  style="font-family: 'Cormorant Garamond', Georgia, serif;">
+
+                Bloom <span class="italic text-[#F5D4D8]">Reads</span>
+
+            </span>
+
+        </a>
+
+
+        <!-- NAVIGATION -->
+        <div class="flex flex-wrap justify-center items-center gap-1">
+
+            <a href="/"
+               class="px-3 py-2 rounded-md text-[15px] font-medium tracking-wide hover:bg-[#F5D4D8] hover:text-[#641E36] transition duration-300">
+                Home
+            </a>
+
+            <a href="/about"
+               class="px-3 py-2 rounded-md text-[15px] font-medium tracking-wide hover:bg-[#F5D4D8] hover:text-[#641E36] transition duration-300">
+                About
+            </a>
+
+            <a href="/books"
+               class="px-3 py-2 rounded-md text-[15px] font-medium tracking-wide hover:bg-[#F5D4D8] hover:text-[#641E36] transition duration-300">
+                Books
+            </a>
+
+            <a href="/categories"
+               class="px-3 py-2 rounded-md text-[15px] font-medium tracking-wide hover:bg-[#F5D4D8] hover:text-[#641E36] transition duration-300">
+                Categories
+            </a>
+
+            <a href="/contact"
+               class="px-3 py-2 rounded-md text-[15px] font-medium tracking-wide hover:bg-[#F5D4D8] hover:text-[#641E36] transition duration-300">
+                Contact
+            </a>
+
+
+            <!-- ADMIN -->
+            <% if (isAdmin) { %>
+
+                <a href="/books"
+                   class="ml-2 px-4 py-2 rounded-full bg-[#F5D4D8] text-[#641E36] text-[13px] font-semibold border border-[#F5D4D8] hover:bg-[#FFF9F5] hover:border-[#FFF9F5] transition duration-300">
+                    ✦ Admin Panel
+                </a>
+
+            <% } else { %>
+
+                <a href="/admin/login"
+                   class="ml-2 px-4 py-2 rounded-full bg-[#F5D4D8] text-[#641E36] text-[13px] font-semibold border border-[#F5D4D8] hover:bg-[#FFF9F5] hover:border-[#FFF9F5] transition duration-300">
+                    ✦ Admin
+                </a>
+
+            <% } %>
+
+        </div>
+
+    </div>
+
+</nav>
+

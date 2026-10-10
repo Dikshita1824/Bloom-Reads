@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Categories | Bloom Reads</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #FFF9F5;
+            color: #492632;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .font-display {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .category-button {
+            display: inline-block;
+            padding: 12px 20px;
+            border-radius: 9px;
+            border: 1px solid #F5D4D8;
+            color: #641E36;
+            background: transparent;
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: all 0.25s ease;
+        }
+
+        .category-button:hover,
+        .category-button.active {
+            background: #641E36;
+            color: white;
+            border-color: #641E36;
+        }
+
+        .book-card {
+            background: white;
+            border: 1px solid #F5D4D8;
+            border-radius: 18px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(69, 9, 32, 0.12);
+        }
+
+        .book-image-box {
+            height: 290px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #FBE8DF;
+            border-radius: 12px;
+        }
+
+        .book-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .book-card:hover .book-image {
+            transform: scale(1.04);
+        }
+
+        .shelf-card {
+            background: #450920;
+            padding: 35px;
+            min-height: 210px;
+            transition: background 0.3s ease;
+            text-decoration: none;
+        }
+
+        .shelf-card:hover {
+            background: #A04460;
+        }
+
+        @media (max-width: 640px) {
+            .page-title {
+                font-size: 46px;
+            }
+
+            .book-image-box {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <%- include('includes/nav.ejs') %>
+
+
+    <!-- CATEGORY HEADER -->
+    <section class="px-5 pt-16 pb-10 sm:px-8">
+
+        <div class="mx-auto max-w-6xl text-center">
+
+            <p class="mb-4 text-xs font-semibold uppercase tracking-[0.35em]"
+               style="color:#A04460;">
+                Explore the Collection
+            </p>
+
+            <h1 class="page-title font-display text-6xl md:text-7xl"
+                style="color:#641E36;">
+                Browse by Category
+            </h1>
+
+            <div class="my-6 flex items-center justify-center gap-4">
+                <span class="h-px w-20" style="background:#F5D4D8;"></span>
+                <span style="color:#A04460;">✦</span>
+                <span class="h-px w-20" style="background:#F5D4D8;"></span>
+            </div>
+
+            <p class="mx-auto max-w-xl text-sm leading-7"
+               style="color:#A77C87;">
+                Discover captivating stories, magical worlds, thrilling mysteries
+                and inspiring ideas. Find your next favourite read at Bloom Reads.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- CATEGORY FILTER BUTTONS -->
+    <section class="px-5 pb-14 sm:px-8">
+
+        <div class="mx-auto max-w-5xl rounded-2xl border px-5 py-5 shadow-sm"
+             style="background:#FBE8DF; border-color:#F5D4D8;">
+
+            <div class="flex flex-wrap items-center justify-center gap-3">
+
+                <%
+                    const categoryOptions = [
+                        { name: 'All Books', value: '' },
+                        { name: 'Fiction', value: 'Fiction' },
+                        { name: 'Romance', value: 'Romance' },
+                        { name: 'Mystery', value: 'Mystery' },
+                        { name: 'Fantasy', value: 'Fantasy' },
+                        { name: 'Classic', value: 'Classic' },
+                        { name: 'Self-Help', value: 'Self-Help' }
+                    ];
+
+                    const selectedCategory =
+                        typeof currentCategory !== 'undefined'
+                            ? currentCategory
+                            : (typeof category !== 'undefined' ? category : '');
+                %>
+
+                <% categoryOptions.forEach(item => { %>
+
+                    <a href="<%= item.value ? '/categories/' + encodeURIComponent(item.value) : '/categories' %>"
+                       class="category-button <%= String(selectedCategory || '').toLowerCase() === item.value.toLowerCase() ? 'active' : '' %>">
+
+                        <%= item.name %>
+
+                    </a>
+
+                <% }) %>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- BOOK COLLECTION -->
+    <section class="px-5 pb-20 sm:px-8">
+
+        <div class="mx-auto max-w-7xl">
+
+            <!-- SECTION HEADING -->
+            <div class="mb-5 text-center">
+
+                <p class="mb-4 text-sm uppercase tracking-[0.3em]"
+                   style="color:#A04460;">
+                    The Collection
+                </p>
+
+                <h2 class="font-display text-5xl md:text-6xl"
+                    style="color:#641E36;">
+
+                    <% if (selectedCategory) { %>
+                        <%= selectedCategory %> Books
+                    <% } else { %>
+                        Books in This Collection
+                    <% } %>
+
+                </h2>
+
+            </div>
+
+            <div class="mb-12 flex items-center justify-center gap-3">
+                <span class="h-px w-20" style="background:#F5D4D8;"></span>
+                <span style="color:#A04460;">✦</span>
+                <span class="h-px w-20" style="background:#F5D4D8;"></span>
+            </div>
+
+
+            <% if (books && books.length > 0) { %>
+
+                <!-- BOOK GRID -->
+                <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+
+                    <% books.forEach(book => { %>
+
+                        <article class="book-card">
+
+                            <!-- TOP STRIP -->
+                            <div class="h-2" style="background:#A04460;"></div>
+
+                            <div class="p-5 sm:p-6">
+
+                                <!-- BOOK IMAGE -->
+                                <div class="book-image-box mb-6">
+
+                                    <%
+                                        let imagePath = book.image || '';
+
+                                        if (imagePath && !imagePath.startsWith('http')) {
+                                            imagePath = '/' + imagePath.replace(/^\/+/, '');
+                                        }
+                                    %>
+
+                                    <% if (imagePath) { %>
+
+                                        <img
+                                            src="<%= imagePath %>"
+                                            alt="<%= book.title %>"
+                                            class="book-image"
+                                            loading="lazy"
+                                            onerror="this.onerror=null; this.src='https://placehold.co/400x550/FBE8DF/641E36?text=Bloom+Reads';">
+
+                                    <% } else { %>
+
+                                        <img
+                                            src="https://placehold.co/400x550/FBE8DF/641E36?text=Bloom+Reads"
+                                            alt="Book cover unavailable"
+                                            class="book-image"
+                                            loading="lazy">
+
+                                    <% } %>
+
+                                </div>
+
+
+                                <!-- CATEGORY -->
+                                <p class="mb-3 text-xs uppercase tracking-[0.2em]"
+                                   style="color:#A04460;">
+                                    <%= book.category || 'Books' %>
+                                </p>
+
+
+                                <!-- BOOK TITLE -->
+                                <h3 class="font-display mb-3 text-3xl"
+                                    style="color:#641E36;">
+                                    <%= book.title %>
+                                </h3>
+
+
+                                <!-- AUTHOR -->
+                                <div class="mb-4 text-sm leading-6"
+                                     style="color:#A77C87;">
+
+                                    <span class="font-semibold"
+                                          style="color:#492632;">
+                                        Author
+                                    </span>
+
+                                    <br>
+
+                                    <%= book.author || 'Unknown Author' %>
+
+                                </div>
+
+
+                                <!-- PRICE -->
+                                <div class="text-sm" style="color:#A77C87;">
+
+                                    <span class="font-semibold"
+                                          style="color:#492632;">
+                                        Price
+                                    </span>
+
+                                    <br>
+
+                                    <span class="text-xl font-bold"
+                                          style="color:#641E36;">
+                                        ₹<%= book.price %>
+                                    </span>
+
+                                </div>
+
+
+                                <!-- AVAILABILITY -->
+                                <div class="mt-6 border-t pt-5"
+                                     style="border-color:#F5D4D8;">
+
+                                    <span class="text-xs uppercase tracking-widest"
+                                          style="color:#A04460;">
+                                        ✦ Available in Collection
+                                    </span>
+
+
+                                    <!-- ADMIN BUTTONS -->
+                                    <% if (typeof isAdmin !== 'undefined' && isAdmin && book._id) { %>
+
+                                        <div class="mt-5 flex flex-wrap gap-3">
+
+                                            <a href="/books/edit/<%= book._id %>"
+                                               class="rounded-lg border px-4 py-2 text-xs uppercase tracking-widest transition hover:bg-[#F5D4D8]"
+                                               style="border-color:#A04460; color:#641E36;">
+
+                                                Edit
+
+                                            </a>
+
+
+                                            <form action="/books/delete/<%= book._id %>"
+                                                  method="POST">
+
+                                                <button
+                                                    type="submit"
+                                                    onclick="return confirm('Are you sure you want to delete this book?')"
+                                                    class="rounded-lg px-4 py-2 text-xs uppercase tracking-widest text-white transition hover:opacity-80"
+                                                    style="background:#641E36;">
+
+                                                    Delete
+
+                                                </button>
+
+                                            </form>
+
+                                        </div>
+
+                                    <% } %>
+
+                                </div>
+
+                            </div>
+
+                        </article>
+
+                    <% }) %>
+
+                </div>
+
+            <% } else { %>
+
+
+                <!-- NO BOOKS FOUND -->
+                <div class="mx-auto max-w-xl rounded-2xl border bg-white px-8 py-16 text-center"
+                     style="border-color:#F5D4D8;">
+
+                    <div class="mb-5 text-5xl" style="color:#A04460;">
+                        ❦
+                    </div>
+
+                    <h2 class="font-display mb-3 text-4xl"
+                        style="color:#641E36;">
+                        The Shelves Are Quiet
+                    </h2>
+
+                    <p class="mb-7 text-sm leading-7"
+                       style="color:#A77C87;">
+
+                        There are currently no books in this category.
+                        Try another category to discover your next favourite.
+
+                    </p>
+
+                    <a href="/categories"
+                       class="inline-block rounded-lg px-6 py-3 text-xs uppercase tracking-widest text-white transition hover:opacity-80"
+                       style="background:#641E36;">
+
+                        View All Books
+
+                    </a>
+
+                </div>
+
+            <% } %>
+
+        </div>
+
+    </section>
+
+
+    <!-- CATEGORY COLLECTION -->
+    <section class="px-5 py-20 sm:px-8"
+             style="background:#ffa5ab;">
+
+        <div class="mx-auto max-w-6xl">
+
+            <div class="mb-12 text-center">
+
+                <p class="mb-4 text-xs uppercase tracking-[0.3em]"
+                   style="color:#450920;">
+                    The Bloom Reads Shelves
+                </p>
+
+                <h2 class="font-display text-5xl md:text-6xl"
+                    style="color:#450920;">
+                    Find Your Next World
+                </h2>
+
+                <div class="mt-5 flex items-center justify-center gap-3">
+                    <span class="h-px w-16" style="background:#A04460;"></span>
+                    <span style="color:#641E36;">✦</span>
+                    <span class="h-px w-16" style="background:#A04460;"></span>
+                </div>
+
+            </div>
+
+
+            <div class="grid grid-cols-1 gap-px bg-[#A04460]/50 md:grid-cols-2 lg:grid-cols-3">
+
+
+                <!-- FICTION -->
+                <a href="/categories/Fiction" class="shelf-card group">
+
+                    <span class="text-sm" style="color:#F5D4D8;">I</span>
+
+                    <h3 class="font-display mt-3 mb-3 text-4xl text-white transition group-hover:translate-x-2">
+                        Fiction
+                    </h3>
+
+                    <p class="text-sm leading-6 text-white/70">
+                        Stories that take you beyond the ordinary.
+                    </p>
+
+                </a>
+
+
+                <!-- ROMANCE -->
+                <a href="/categories/Romance" class="shelf-card group">
+
+                    <span class="text-sm" style="color:#F5D4D8;">II</span>
+
+                    <h3 class="font-display mt-3 mb-3 text-4xl text-white transition group-hover:translate-x-2">
+                        Romance
+                    </h3>
+
+                    <p class="text-sm leading-6 text-white/70">
+                        Beautiful stories about love and relationships.
+                    </p>
+
+                </a>
+
+
+                <!-- MYSTERY -->
+                <a href="/categories/Mystery" class="shelf-card group">
+
+                    <span class="text-sm" style="color:#F5D4D8;">III</span>
+
+                    <h3 class="font-display mt-3 mb-3 text-4xl text-white transition group-hover:translate-x-2">
+                        Mystery
+                    </h3>
+
+                    <p class="text-sm leading-6 text-white/70">
+                        Secrets and surprises hidden between the pages.
+                    </p>
+
+                </a>
+
+
+                <!-- FANTASY -->
+                <a href="/categories/Fantasy" class="shelf-card group">
+
+                    <span class="text-sm" style="color:#F5D4D8;">IV</span>
+
+                    <h3 class="font-display mt-3 mb-3 text-4xl text-white transition group-hover:translate-x-2">
+                        Fantasy
+                    </h3>
+
+                    <p class="text-sm leading-6 text-white/70">
+                        Magical realms and extraordinary adventures.
+                    </p>
+
+                </a>
+
+
+                <!-- CLASSIC -->
+                <a href="/categories/Classic" class="shelf-card group">
+
+                    <span class="text-sm" style="color:#F5D4D8;">V</span>
+
+                    <h3 class="font-display mt-3 mb-3 text-4xl text-white transition group-hover:translate-x-2">
+                        Classics
+                    </h3>
+
+                    <p class="text-sm leading-6 text-white/70">
+                        Timeless books loved across generations.
+                    </p>
+
+                </a>
+
+
+                <!-- SELF-HELP -->
+                <a href="/categories/Self-Help" class="shelf-card group">
+
+                    <span class="text-sm" style="color:#F5D4D8;">VI</span>
+
+                    <h3 class="font-display mt-3 mb-3 text-4xl text-white transition group-hover:translate-x-2">
+                        Self-Help
+                    </h3>
+
+                    <p class="text-sm leading-6 text-white/70">
+                        Ideas to inspire learning, growth and new habits.
+                    </p>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <%- include('includes/footer.ejs') %>
+
+</body>
+</html>
