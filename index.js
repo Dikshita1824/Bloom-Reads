@@ -126,6 +126,10 @@ app.get("/about", (req, res) => {
     res.render("about.ejs");
 });
 
+// CART PAGE
+app.get("/cart", (req, res) => {
+    res.render("cart.ejs");
+});
 
 // ===============================
 // BOOKS
@@ -290,12 +294,14 @@ app.post(
 // CATEGORIES
 // ===============================
 
+// All Categories
 app.get("/categories", async (req, res) => {
     try {
         const books = await Book.find();
 
         res.render("categories.ejs", {
-            books
+            books,
+            currentCategory: ""
         });
 
     } catch (err) {
@@ -305,16 +311,23 @@ app.get("/categories", async (req, res) => {
 });
 
 
+// Selected Category
 app.get("/categories/:category", async (req, res) => {
     try {
         const category = req.params.category;
 
         const books = await Book.find({
-            category: category
+            category: {
+                $regex: new RegExp(
+                    "^" + category.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "$",
+                    "i"
+                )
+            }
         });
 
         res.render("categories.ejs", {
-            books
+            books,
+            currentCategory: category
         });
 
     } catch (err) {
@@ -322,7 +335,6 @@ app.get("/categories/:category", async (req, res) => {
         res.status(500).send("Unable to load category.");
     }
 });
-
 
 // ===============================
 // CONTACT PAGE

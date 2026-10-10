@@ -1,9 +1,9 @@
-
 <nav class="bg-[#641E36] text-[#FFF9F5] px-5 md:px-8 py-4 shadow-md border-b border-[#F5D4D8]/30">
 
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
 
         <!-- LOGO -->
+
         <a href="/"
            class="group flex items-center gap-2 no-underline">
 
@@ -22,6 +22,7 @@
 
 
         <!-- NAVIGATION -->
+
         <div class="flex flex-wrap justify-center items-center gap-1">
 
             <a href="/"
@@ -50,19 +51,49 @@
             </a>
 
 
+            <!-- CART BUTTON -->
+
+            <a href="/cart"
+               class="relative ml-2 px-4 py-2 rounded-full
+                      bg-[#FFF9F5] text-[#641E36]
+                      text-sm font-semibold
+                      border border-[#F5D4D8]
+                      hover:bg-[#F5D4D8]
+                      transition duration-300">
+
+                🛒 Cart
+
+                <span id="cartCount"
+                      class="hidden absolute -top-2 -right-2
+                             min-w-5 h-5 px-1
+                             flex items-center justify-center
+                             rounded-full bg-[#E9A4B2]
+                             text-[#641E36] text-xs font-bold
+                             border border-white">
+                    0
+                </span>
+
+            </a>
+
+
             <!-- ADMIN -->
+
             <% if (isAdmin) { %>
 
                 <a href="/books"
                    class="ml-2 px-4 py-2 rounded-full bg-[#F5D4D8] text-[#641E36] text-[13px] font-semibold border border-[#F5D4D8] hover:bg-[#FFF9F5] hover:border-[#FFF9F5] transition duration-300">
+
                     ✦ Admin Panel
+
                 </a>
 
             <% } else { %>
 
                 <a href="/admin/login"
                    class="ml-2 px-4 py-2 rounded-full bg-[#F5D4D8] text-[#641E36] text-[13px] font-semibold border border-[#F5D4D8] hover:bg-[#FFF9F5] hover:border-[#FFF9F5] transition duration-300">
+
                     ✦ Admin
+
                 </a>
 
             <% } %>
@@ -73,3 +104,37 @@
 
 </nav>
 
+
+<!-- CART COUNTER SCRIPT -->
+
+<script>
+
+    function updateCartCounter() {
+
+        let cart = [];
+
+        try {
+            cart = JSON.parse(localStorage.getItem("bloomReadsCart")) || [];
+        } catch (error) {
+            cart = [];
+        }
+
+        const totalItems = cart.reduce(function (total, item) {
+            return total + Number(item.quantity || 0);
+        }, 0);
+
+        const counter = document.getElementById("cartCount");
+
+        if (counter) {
+
+            counter.textContent = totalItems;
+
+            counter.classList.toggle("hidden", totalItems === 0);
+
+        }
+
+    }
+
+    updateCartCounter();
+
+</script>

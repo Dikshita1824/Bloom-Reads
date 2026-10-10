@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Cart - Bloom Reads</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+</head>
+
+
+<body class="bg-[#FFF9F5] text-[#492632]">
+
+    <%- include('includes/nav.ejs') %>
+
+
+    <!-- MAIN CART SECTION -->
+
+    <section class="max-w-7xl mx-auto px-5 md:px-8 py-16">
+
+
+        <!-- HEADING -->
+
+        <div class="text-center mb-12">
+
+            <p class="text-[#A04460] uppercase tracking-[0.3em] text-sm mb-4">
+
+                Your Favourite Reads
+
+            </p>
+
+            <h1 class="font-serif text-5xl md:text-6xl text-[#641E36]">
+
+                My Cart
+
+            </h1>
+
+            <p class="text-[#A77C87] mt-4">
+
+                Your next favourite book is waiting for you.
+
+            </p>
+
+        </div>
+
+
+        <!-- DECORATIVE LINE -->
+
+        <div class="flex items-center justify-center gap-3 mb-12">
+
+            <span class="h-px w-20 bg-[#F5D4D8]"></span>
+
+            <span class="text-[#A04460]">✦</span>
+
+            <span class="h-px w-20 bg-[#F5D4D8]"></span>
+
+        </div>
+
+
+        <!-- CART CONTENT -->
+
+        <div id="cartContainer"
+             class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+
+            <!-- CART ITEMS -->
+
+            <div id="cartItems"
+                 class="lg:col-span-2 space-y-5">
+
+            </div>
+
+
+            <!-- ORDER SUMMARY -->
+
+            <div id="orderSummary"
+                 class="hidden lg:col-span-1">
+
+                <div class="bg-white border border-[#F5D4D8]
+                            rounded-2xl p-6 shadow-sm sticky top-6">
+
+                    <h2 class="font-serif text-3xl text-[#641E36] mb-6">
+
+                        Order Summary
+
+                    </h2>
+
+
+                    <div class="flex justify-between items-center mb-4">
+
+                        <span class="text-[#A77C87]">
+
+                            Total Items
+
+                        </span>
+
+                        <span id="totalItems"
+                              class="font-semibold text-[#641E36]">
+
+                            0
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="flex justify-between items-center mb-5">
+
+                        <span class="text-[#A77C87]">
+
+                            Subtotal
+
+                        </span>
+
+                        <span id="subtotal"
+                              class="font-semibold text-[#641E36]">
+
+                            ₹0
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="border-t border-[#F5D4D8] pt-5">
+
+                        <div class="flex justify-between items-center gap-3">
+
+                            <span class="font-semibold text-[#492632]">
+
+                                Total Amount
+
+                            </span>
+
+                            <span id="grandTotal"
+                                  class="font-bold text-2xl text-[#641E36]">
+
+                                ₹0
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CHECKOUT BUTTON -->
+
+                    <button
+                        type="button"
+                        id="checkoutBtn"
+                        class="w-full mt-7 px-5 py-4
+                               rounded-xl bg-[#641E36]
+                               text-white font-semibold
+                               hover:bg-[#A04460]
+                               transition duration-300">
+
+                        Proceed to Checkout →
+
+                    </button>
+
+
+                    <p class="text-xs text-center text-[#A77C87] mt-4">
+
+                        Delivery charges, if any, are not included.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- EMPTY CART -->
+
+        <div id="emptyCart"
+             class="hidden text-center py-12">
+
+            <div class="text-6xl mb-6">
+
+                🛍️
+
+            </div>
+
+            <h2 class="font-serif text-3xl text-[#641E36] mb-4">
+
+                Your cart is empty
+
+            </h2>
+
+            <p class="text-[#A77C87] mb-8">
+
+                Looks like you haven't added any books yet.
+
+            </p>
+
+            <a href="/books"
+               class="inline-block px-7 py-3 rounded-lg
+                      bg-[#641E36] text-white
+                      hover:bg-[#A04460]
+                      transition duration-300">
+
+                Explore Books →
+
+            </a>
+
+        </div>
+
+
+        <!-- CONTINUE SHOPPING -->
+
+        <div class="mt-10">
+
+            <a href="/books"
+               class="inline-block text-[#641E36]
+                      hover:text-[#A04460]
+                      font-semibold transition duration-300">
+
+                ← Continue Shopping
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <%- include('includes/footer.ejs') %>
+
+
+    <!-- CART JAVASCRIPT -->
+
+    <script>
+
+        const CART_KEY = "bloomReadsCart";
+
+
+        // Read cart data safely.
+
+        function getCart() {
+
+            try {
+
+                const cart = JSON.parse(localStorage.getItem(CART_KEY));
+
+                return Array.isArray(cart) ? cart : [];
+
+            } catch (error) {
+
+                return [];
+
+            }
+
+        }
+
+
+        // Save cart data.
+
+        function saveCart(cart) {
+
+            localStorage.setItem(CART_KEY, JSON.stringify(cart));
+
+            updateCartCounter();
+
+        }
+
+
+        // Update navbar counter.
+
+        function updateCartCounter() {
+
+            const cart = getCart();
+
+            const count = cart.reduce(function (total, item) {
+
+                return total + Math.max(0, Number(item.quantity) || 0);
+
+            }, 0);
+
+            const counter = document.getElementById("cartCount");
+
+            if (counter) {
+
+                counter.textContent = count;
+
+                counter.classList.toggle("hidden", count === 0);
+
+            }
+
+        }
+
+
+        // Format prices in Indian currency format.
+
+        function formatPrice(price) {
+
+            return "₹" + Number(price).toLocaleString("en-IN", {
+                maximumFractionDigits: 2
+            });
+
+        }
+
+
+        // Create a cart item element safely.
+
+        function createCartItem(item, index) {
+
+            const card = document.createElement("div");
+
+            card.className =
+                "bg-white border border-[#F5D4D8] rounded-2xl p-5 shadow-sm";
+
+
+            const row = document.createElement("div");
+
+            row.className = "flex flex-col sm:flex-row gap-5";
+
+
+            // Book image.
+
+            const image = document.createElement("img");
+
+            image.src = item.image || "https://placehold.co/150x200/FBE8DF/641E36?text=Book";
+
+            image.alt = item.title || "Book cover";
+
+            image.className =
+                "w-32 h-44 object-contain rounded-xl bg-[#FBE8DF] mx-auto sm:mx-0";
+
+            image.onerror = function () {
+
+                this.onerror = null;
+
+                this.src = "https://placehold.co/150x200/FBE8DF/641E36?text=Book";
+
+            };
+
+
+            // Details container.
+
+            const details = document.createElement("div");
+
+            details.className = "flex-1";
+
+
+            // Book title.
+
+            const title = document.createElement("h2");
+
+            title.className = "font-serif text-2xl text-[#641E36]";
+
+            title.textContent = item.title || "Untitled Book";
+
+
+            // Author.
+
+            const author = document.createElement("p");
+
+            author.className = "text-sm text-[#A77C87] mt-2";
+
+            author.textContent = "By " + (item.author || "Unknown Author");
+
+
+            // Price.
+
+            const price = document.createElement("p");
+
+            price.className = "font-bold text-lg text-[#641E36] mt-3";
+
+            price.textContent = formatPrice(item.price);
+
+
+            // Quantity controls.
+
+            const controls = document.createElement("div");
+
+            controls.className = "flex flex-wrap items-center gap-3 mt-5";
+
+
+            const decreaseBtn = document.createElement("button");
+
+            decreaseBtn.type = "button";
+
+            decreaseBtn.textContent = "−";
+
+            decreaseBtn.setAttribute("aria-label", "Decrease quantity");
+
+            decreaseBtn.className =
+                "w-9 h-9 rounded-lg border border-[#F5D4D8] " +
+                "text-[#641E36] text-xl hover:bg-[#F5D4D8]";
+
+
+            const quantity = document.createElement("span");
+
+            quantity.className = "font-semibold text-[#641E36]";
+
+            quantity.textContent = item.quantity;
+
+
+            const increaseBtn = document.createElement("button");
+
+            increaseBtn.type = "button";
+
+            increaseBtn.textContent = "+";
+
+            increaseBtn.setAttribute("aria-label", "Increase quantity");
+
+            increaseBtn.className =
+                "w-9 h-9 rounded-lg bg-[#641E36] " +
+                "text-white text-xl hover:bg-[#A04460]";
+
+
+            const removeBtn = document.createElement("button");
+
+            removeBtn.type = "button";
+
+            removeBtn.textContent = "Remove";
+
+            removeBtn.className =
+                "ml-0 sm:ml-3 text-sm text-[#A04460] " +
+                "underline hover:text-[#641E36]";
+
+
+            // Item subtotal.
+
+            const itemSubtotal = document.createElement("p");
+
+            itemSubtotal.className =
+                "font-semibold text-[#492632] mt-4";
+
+            itemSubtotal.textContent =
+                "Item total: " +
+                formatPrice(Number(item.price) * Number(item.quantity));
+
+
+            // Decrease quantity.
+
+            decreaseBtn.addEventListener("click", function () {
+
+                changeQuantity(item.id, -1);
+
+            });
+
+
+            // Increase quantity.
+
+            increaseBtn.addEventListener("click", function () {
+
+                changeQuantity(item.id, 1);
+
+            });
+
+
+            // Remove item.
+
+            removeBtn.addEventListener("click", function () {
+
+                removeItem(item.id);
+
+            });
+
+
+            controls.appendChild(decreaseBtn);
+
+            controls.appendChild(quantity);
+
+            controls.appendChild(increaseBtn);
+
+            controls.appendChild(removeBtn);
+
+
+            details.appendChild(title);
+
+            details.appendChild(author);
+
+            details.appendChild(price);
+
+            details.appendChild(controls);
+
+            details.appendChild(itemSubtotal);
+
+
+            row.appendChild(image);
+
+            row.appendChild(details);
+
+            card.appendChild(row);
+
+
+            return card;
+
+        }
+
+
+        // Render cart items.
+
+        function renderCart() {
+
+            const cart = getCart();
+
+            const cartItems = document.getElementById("cartItems");
+
+            const emptyCart = document.getElementById("emptyCart");
+
+            const orderSummary = document.getElementById("orderSummary");
+
+            cartItems.replaceChildren();
+
+
+            // Keep only valid items.
+
+            const validCart = cart.filter(function (item) {
+
+                return item &&
+                    item.id &&
+                    Number.isFinite(Number(item.price)) &&
+                    Number(item.price) >= 0 &&
+                    Number.isFinite(Number(item.quantity)) &&
+                    Number(item.quantity) > 0;
+
+            });
+
+
+            if (validCart.length !== cart.length) {
+
+                saveCart(validCart);
+
+            }
+
+
+            // Empty cart state.
+
+            if (validCart.length === 0) {
+
+                emptyCart.classList.remove("hidden");
+
+                orderSummary.classList.add("hidden");
+
+                updateCartCounter();
+
+                return;
+
+            }
+
+
+            emptyCart.classList.add("hidden");
+
+            orderSummary.classList.remove("hidden");
+
+
+            // Render each book.
+
+            validCart.forEach(function (item, index) {
+
+                cartItems.appendChild(createCartItem(item, index));
+
+            });
+
+
+            // Calculate totals.
+
+            const totalItems = validCart.reduce(function (total, item) {
+
+                return total + Number(item.quantity);
+
+            }, 0);
+
+
+            const totalPrice = validCart.reduce(function (total, item) {
+
+                return total +
+                    (Number(item.price) * Number(item.quantity));
+
+            }, 0);
+
+
+            document.getElementById("totalItems").textContent = totalItems;
+
+            document.getElementById("subtotal").textContent =
+                formatPrice(totalPrice);
+
+            document.getElementById("grandTotal").textContent =
+                formatPrice(totalPrice);
+
+
+            updateCartCounter();
+
+        }
+
+
+        // Change quantity.
+
+        function changeQuantity(id, amount) {
+
+            const cart = getCart();
+
+            const item = cart.find(function (book) {
+
+                return book.id === id;
+
+            });
+
+
+            if (!item) return;
+
+
+            item.quantity = Number(item.quantity) + amount;
+
+
+            if (item.quantity <= 0) {
+
+                const updatedCart = cart.filter(function (book) {
+
+                    return book.id !== id;
+
+                });
+
+                saveCart(updatedCart);
+
+            } else {
+
+                saveCart(cart);
+
+            }
+
+
+            renderCart();
+
+        }
+
+
+        // Remove an item.
+
+        function removeItem(id) {
+
+            const cart = getCart();
+
+            const updatedCart = cart.filter(function (item) {
+
+                return item.id !== id;
+
+            });
+
+            saveCart(updatedCart);
+
+            renderCart();
+
+        }
+
+
+        // Checkout placeholder.
+
+        document.getElementById("checkoutBtn").addEventListener("click", function () {
+
+            alert(
+                "Your cart is ready! Online checkout and payment have not been configured yet."
+            );
+
+        });
+
+
+        // Render when page opens.
+
+        renderCart();
+
+    </script>
+
+</body>
+
+</html>
