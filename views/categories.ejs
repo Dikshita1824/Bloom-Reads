@@ -17,10 +17,25 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --cream: #FFF9F5;
+            --soft-pink: #FBE8DF;
+            --border-pink: #F5D4D8;
+            --burgundy: #641E36;
+            --deep-burgundy: #450920;
+            --rose: #A04460;
+            --muted-rose: #A77C87;
+            --text: #492632;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             margin: 0;
-            background: #FFF9F5;
-            color: #492632;
+            background: var(--cream);
+            color: var(--text);
             font-family: 'Inter', sans-serif;
         }
 
@@ -28,13 +43,15 @@
             font-family: 'Cormorant Garamond', serif;
         }
 
+        /* CATEGORY BUTTONS */
+
         .category-button {
             display: inline-block;
             padding: 12px 20px;
+            border: 1px solid var(--border-pink);
             border-radius: 9px;
-            border: 1px solid #F5D4D8;
-            color: #641E36;
             background: transparent;
+            color: var(--burgundy);
             text-decoration: none;
             font-size: 12px;
             letter-spacing: 1.5px;
@@ -44,64 +61,445 @@
 
         .category-button:hover,
         .category-button.active {
-            background: #641E36;
+            border-color: var(--burgundy);
+            background: var(--burgundy);
             color: white;
-            border-color: #641E36;
         }
 
+        .category-button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* BOOK CARDS - MATCHING BOOKS.EJS */
+
         .book-card {
-            background: white;
-            border: 1px solid #F5D4D8;
-            border-radius: 18px;
+            display: flex;
+            flex-direction: column;
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #F0DDE0;
+            border-radius: 18px;
+            background: #FFFFFF;
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease,
+                border-color 0.3s ease;
         }
 
         .book-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(69, 9, 32, 0.12);
+            transform: translateY(-6px);
+            box-shadow: 0 18px 40px rgba(100, 30, 54, 0.10);
+            border-color: #D9AAB6;
         }
 
-        .book-image-box {
-            height: 290px;
+        .book-cover-area {
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
+            min-height: 280px;
             overflow: hidden;
-            background: #FBE8DF;
-            border-radius: 12px;
+            background: linear-gradient(145deg, #FBECE7, #F8E0E2);
         }
 
         .book-image {
-            width: 100%;
-            height: 100%;
+            width: 170px;
+            height: 230px;
             object-fit: contain;
-            transition: transform 0.3s ease;
+            filter: drop-shadow(0 10px 12px rgba(73, 38, 50, 0.16));
+            transition: transform 0.4s ease;
         }
 
         .book-card:hover .book-image {
-            transform: scale(1.04);
+            transform: scale(1.05) rotate(-1deg);
         }
 
-        .shelf-card {
-            background: #450920;
-            padding: 35px;
-            min-height: 210px;
-            transition: background 0.3s ease;
+        .book-number {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: rgba(255, 249, 245, 0.92);
+            color: var(--burgundy);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .category-badge {
+            display: inline-block;
+            padding: 6px 11px;
+            border-radius: 30px;
+            background: #FBE8EB;
+            color: #8E3C56;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1.3px;
+            text-transform: uppercase;
+        }
+
+        .book-title {
+            color: var(--burgundy);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 23px;
+            font-weight: 500;
+            line-height: 1.3;
+            overflow-wrap: anywhere;
+        }
+
+        .book-author {
+            color: var(--muted-rose);
+            font-size: 13px;
+            line-height: 1.7;
+            overflow-wrap: anywhere;
+        }
+
+        .book-price {
+            color: var(--burgundy);
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .book-divider {
+            height: 1px;
+            background: #F2E3E5;
+        }
+
+        .availability-label {
+            color: #9A5369;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+        }
+
+        /* PURCHASE BUTTONS */
+
+        .add-to-cart-btn,
+        .buy-now-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            padding: 10px 8px;
+            border-radius: 9px;
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+
+        .add-to-cart-btn {
+            border: 1px solid var(--burgundy);
+            background: white;
+            color: var(--burgundy);
+        }
+
+        .add-to-cart-btn:hover {
+            background: #FBE8EB;
+        }
+
+        .buy-now-btn {
+            border: 1px solid var(--burgundy);
+            background: var(--burgundy);
+            color: white;
+        }
+
+        .buy-now-btn:hover {
+            border-color: var(--rose);
+            background: var(--rose);
+        }
+
+        /* ADMIN BUTTONS */
+
+        .admin-action {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 14px;
+            border-radius: 7px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+
+        .edit-action {
+            border: 1px solid var(--rose);
+            color: var(--burgundy);
+        }
+
+        .edit-action:hover {
+            background: #FBE8EB;
+        }
+
+        .delete-action {
+            border: 1px solid var(--burgundy);
+            background: var(--burgundy);
+            color: white;
+        }
+
+        .delete-action:hover {
+            background: var(--rose);
+        }
+
+        /* EDITORIAL READER SECTION */
+
+        .reader-section {
+            position: relative;
+            overflow: hidden;
+            padding: 85px 24px;
+            border-top: 1px solid #F1D5D8;
+            border-bottom: 1px solid #F1D5D8;
+            background: #FBE8DF;
+        }
+
+        .reader-section::before {
+            position: absolute;
+            top: -100px;
+            right: -80px;
+            width: 300px;
+            height: 300px;
+            border: 1px solid rgba(100, 30, 54, 0.09);
+            border-radius: 50%;
+            content: "";
+            pointer-events: none;
+        }
+
+        .reader-section::after {
+            position: absolute;
+            bottom: -150px;
+            left: -100px;
+            width: 350px;
+            height: 350px;
+            border: 1px solid rgba(100, 30, 54, 0.09);
+            border-radius: 50%;
+            content: "";
+            pointer-events: none;
+        }
+
+        .reader-eyebrow {
+            color: var(--rose);
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .reader-heading {
+            max-width: 750px;
+            margin: 18px auto;
+            color: var(--burgundy);
+            font-size: clamp(42px, 6vw, 68px);
+            font-weight: 500;
+            line-height: 1.08;
+        }
+
+        .reader-heading em {
+            color: var(--rose);
+            font-weight: 400;
+        }
+
+        .reader-intro {
+            max-width: 570px;
+            margin: 0 auto;
+            color: var(--muted-rose);
+            font-size: 13px;
+            line-height: 2;
+        }
+
+        .reader-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin: 27px 0 45px;
+        }
+
+        .reader-divider span:not(.star) {
+            width: 65px;
+            height: 1px;
+            background: #DDB8C0;
+        }
+
+        .reader-divider .star {
+            color: var(--rose);
+            font-size: 17px;
+        }
+
+        .reader-columns {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .reader-column {
+            padding: 12px 32px;
+            text-align: center;
+        }
+
+        .reader-column + .reader-column {
+            border-left: 1px solid #E8C8CD;
+        }
+
+        .reader-number {
+            display: block;
+            margin-bottom: 15px;
+            color: var(--rose);
+            font-size: 11px;
+            letter-spacing: 3px;
+        }
+
+        .reader-column h3 {
+            margin-bottom: 12px;
+            color: var(--burgundy);
+            font-size: 31px;
+            font-weight: 500;
+            line-height: 1.15;
+        }
+
+        .reader-column p {
+            color: #956C78;
+            font-size: 12px;
+            line-height: 1.9;
+        }
+
+        .reader-quote {
+            margin-top: 48px;
+            color: var(--burgundy);
+            font-size: 23px;
+            font-style: italic;
+            text-align: center;
+        }
+
+        .reader-quote span {
+            display: block;
+            margin-top: 10px;
+            color: var(--muted-rose);
+            font-family: 'Inter', sans-serif;
+            font-size: 9px;
+            font-style: normal;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* EMPTY STATE */
+
+        .empty-state {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 60px 25px;
+            border: 1px solid var(--border-pink);
+            border-radius: 18px;
+            background: white;
+            text-align: center;
+        }
+
+        .empty-state h2 {
+            margin-bottom: 12px;
+            color: var(--burgundy);
+            font-size: 42px;
+        }
+
+        .empty-state p {
+            margin-bottom: 25px;
+            color: var(--muted-rose);
+            font-size: 13px;
+            line-height: 1.9;
+        }
+
+        .primary-button {
+            display: inline-block;
+            padding: 13px 22px;
+            border: 1px solid var(--burgundy);
+            border-radius: 8px;
+            background: var(--burgundy);
+            color: white;
+            font-size: 10px;
+            letter-spacing: 1.5px;
             text-decoration: none;
+            text-transform: uppercase;
+            transition: all 0.25s ease;
         }
 
-        .shelf-card:hover {
-            background: #A04460;
+        .primary-button:hover {
+            background: var(--deep-burgundy);
+            transform: translateY(-2px);
+        }
+
+        /* CART MESSAGE */
+
+        #cartMessage {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 768px) {
+            .reader-columns {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .reader-column {
+                padding: 15px 10px 25px;
+            }
+
+            .reader-column + .reader-column {
+                border-top: 1px solid #E8C8CD;
+                border-left: none;
+                padding-top: 30px;
+            }
+
+            .reader-quote {
+                font-size: 20px;
+                line-height: 1.6;
+            }
         }
 
         @media (max-width: 640px) {
             .page-title {
-                font-size: 46px;
+                font-size: 43px;
             }
 
-            .book-image-box {
-                height: 250px;
+            .book-cover-area {
+                min-height: 250px;
+            }
+
+            .book-image {
+                width: 150px;
+                height: 205px;
+            }
+
+            .book-title {
+                font-size: 21px;
+            }
+
+            .category-button {
+                padding: 11px 13px;
+                font-size: 10px;
+                letter-spacing: 1px;
+            }
+
+            .reader-section {
+                padding: 65px 20px;
+            }
+
+            .reader-heading {
+                font-size: 43px;
+            }
+
+            .reader-intro {
+                font-size: 12px;
             }
         }
     </style>
@@ -110,10 +508,12 @@
 <body>
 
     <!-- NAVBAR -->
+
     <%- include('includes/nav.ejs') %>
 
 
     <!-- CATEGORY HEADER -->
+
     <section class="px-5 pt-16 pb-10 sm:px-8">
 
         <div class="mx-auto max-w-6xl text-center">
@@ -123,15 +523,19 @@
                 Explore the Collection
             </p>
 
-            <h1 class="page-title font-display text-6xl md:text-7xl"
+            <h1 class="page-title font-serif text-5xl md:text-6xl"
                 style="color:#641E36;">
                 Browse by Category
             </h1>
 
             <div class="my-6 flex items-center justify-center gap-4">
+
                 <span class="h-px w-20" style="background:#F5D4D8;"></span>
+
                 <span style="color:#A04460;">✦</span>
+
                 <span class="h-px w-20" style="background:#F5D4D8;"></span>
+
             </div>
 
             <p class="mx-auto max-w-xl text-sm leading-7"
@@ -146,6 +550,7 @@
 
 
     <!-- CATEGORY FILTER BUTTONS -->
+
     <section class="px-5 pb-14 sm:px-8">
 
         <div class="mx-auto max-w-5xl rounded-2xl border px-5 py-5 shadow-sm"
@@ -173,7 +578,7 @@
                 <% categoryOptions.forEach(item => { %>
 
                     <a href="<%= item.value ? '/categories/' + encodeURIComponent(item.value) : '/categories' %>"
-                       class="category-button <%= String(selectedCategory || '').toLowerCase() === item.value.toLowerCase() ? 'active' : '' %>">
+                       class="category-button <%= String(selectedCategory || '').trim().toLowerCase() === item.value.toLowerCase() ? 'active' : '' %>">
 
                         <%= item.name %>
 
@@ -189,11 +594,14 @@
 
 
     <!-- BOOK COLLECTION -->
+
     <section class="px-5 pb-20 sm:px-8">
 
         <div class="mx-auto max-w-7xl">
 
+
             <!-- SECTION HEADING -->
+
             <div class="mb-5 text-center">
 
                 <p class="mb-4 text-sm uppercase tracking-[0.3em]"
@@ -214,152 +622,232 @@
 
             </div>
 
+
+            <!-- DECORATIVE LINE -->
+
             <div class="mb-12 flex items-center justify-center gap-3">
+
                 <span class="h-px w-20" style="background:#F5D4D8;"></span>
+
                 <span style="color:#A04460;">✦</span>
+
                 <span class="h-px w-20" style="background:#F5D4D8;"></span>
+
+            </div>
+
+
+            <!-- CART SUCCESS MESSAGE -->
+
+            <div id="cartMessage"
+                 role="status"
+                 aria-live="polite"
+                 class="hidden mx-auto mb-8 max-w-2xl rounded-xl border px-5 py-4 text-center text-sm"
+                 style="background:#FBE8EB; color:#641E36; border-color:#E8C4CD;">
             </div>
 
 
             <% if (books && books.length > 0) { %>
 
-                <!-- BOOK GRID -->
-                <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
 
-                    <% books.forEach(book => { %>
+                <!-- BOOK GRID -->
+
+                <main class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+
+                    <% books.forEach((book, index) => { %>
+
+                        <%
+                            const bookId = book._id
+                                ? book._id.toString()
+                                : 'default-' + encodeURIComponent(book.title || '');
+
+                            let imagePath = book.image || '';
+
+                            if (imagePath && !imagePath.startsWith('http')) {
+                                imagePath = '/' + imagePath.replace(/^\/+/, '');
+                            }
+
+                            const bookCategory = book.category || 'Books';
+                            const bookTitle = book.title || 'Untitled Book';
+                            const bookAuthor = book.author || 'Unknown Author';
+                        %>
+
+
+                        <!-- BOOK CARD -->
 
                         <article class="book-card">
 
-                            <!-- TOP STRIP -->
-                            <div class="h-2" style="background:#A04460;"></div>
 
-                            <div class="p-5 sm:p-6">
+                            <!-- BOOK COVER -->
 
-                                <!-- BOOK IMAGE -->
-                                <div class="book-image-box mb-6">
+                            <div class="book-cover-area">
 
-                                    <%
-                                        let imagePath = book.image || '';
+                                <span class="book-number">
+                                    <%= String(index + 1).padStart(2, '0') %>
+                                </span>
 
-                                        if (imagePath && !imagePath.startsWith('http')) {
-                                            imagePath = '/' + imagePath.replace(/^\/+/, '');
-                                        }
-                                    %>
+                                <img
+                                    src="<%= imagePath || 'https://placehold.co/400x550/FBE8DF/641E36?text=Bloom+Reads' %>"
+                                    alt="<%= bookTitle %>"
+                                    class="book-image"
+                                    loading="lazy"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/400x550/FBE8DF/641E36?text=Bloom+Reads';">
 
-                                    <% if (imagePath) { %>
+                            </div>
 
-                                        <img
-                                            src="<%= imagePath %>"
-                                            alt="<%= book.title %>"
-                                            class="book-image"
-                                            loading="lazy"
-                                            onerror="this.onerror=null; this.src='https://placehold.co/400x550/FBE8DF/641E36?text=Bloom+Reads';">
 
-                                    <% } else { %>
+                            <!-- BOOK DETAILS -->
 
-                                        <img
-                                            src="https://placehold.co/400x550/FBE8DF/641E36?text=Bloom+Reads"
-                                            alt="Book cover unavailable"
-                                            class="book-image"
-                                            loading="lazy">
+                            <div class="flex flex-1 flex-col p-5 md:p-6">
 
-                                    <% } %>
+
+                                <!-- CATEGORY BADGE -->
+
+                                <div class="mb-4">
+
+                                    <span class="category-badge">
+                                        <%= bookCategory %>
+                                    </span>
 
                                 </div>
 
 
-                                <!-- CATEGORY -->
-                                <p class="mb-3 text-xs uppercase tracking-[0.2em]"
-                                   style="color:#A04460;">
-                                    <%= book.category || 'Books' %>
-                                </p>
-
-
                                 <!-- BOOK TITLE -->
-                                <h3 class="font-display mb-3 text-3xl"
-                                    style="color:#641E36;">
-                                    <%= book.title %>
+
+                                <h3 class="book-title mb-3">
+                                    <%= bookTitle %>
                                 </h3>
 
 
                                 <!-- AUTHOR -->
-                                <div class="mb-4 text-sm leading-6"
-                                     style="color:#A77C87;">
+
+                                <p class="book-author mb-5">
 
                                     <span class="font-semibold"
                                           style="color:#492632;">
-                                        Author
+                                        Written by
                                     </span>
 
                                     <br>
 
-                                    <%= book.author || 'Unknown Author' %>
+                                    <%= bookAuthor %>
+
+                                </p>
+
+
+                                <!-- PRICE DIVIDER -->
+
+                                <div class="book-divider mb-4"></div>
+
+
+                                <!-- PRICE AND AVAILABILITY -->
+
+                                <div class="mb-5 flex items-center justify-between gap-3">
+
+                                    <div>
+
+                                        <p class="mb-1 text-xs"
+                                           style="color:#A77C87;">
+                                            Price
+                                        </p>
+
+                                        <p class="book-price">
+                                            ₹<%= book.price %>
+                                        </p>
+
+                                    </div>
+
+                                    <div class="text-right">
+
+                                        <p class="availability-label">
+                                            ✦ Available
+                                        </p>
+
+                                        <p class="mt-1 text-xs"
+                                           style="color:#B58B96;">
+                                            In our collection
+                                        </p>
+
+                                    </div>
 
                                 </div>
 
 
-                                <!-- PRICE -->
-                                <div class="text-sm" style="color:#A77C87;">
+                                <!-- ADD TO CART AND BUY NOW -->
 
-                                    <span class="font-semibold"
-                                          style="color:#492632;">
-                                        Price
-                                    </span>
+                                <div class="mt-auto grid grid-cols-2 gap-3">
 
-                                    <br>
+                                    <!-- ADD TO CART -->
 
-                                    <span class="text-xl font-bold"
-                                          style="color:#641E36;">
-                                        ₹<%= book.price %>
-                                    </span>
+                                    <button
+                                        type="button"
+                                        class="add-to-cart-btn"
+                                        data-id="<%= bookId %>"
+                                        data-title="<%= bookTitle %>"
+                                        data-author="<%= bookAuthor %>"
+                                        data-price="<%= book.price %>"
+                                        data-image="<%= imagePath %>">
 
-                                </div>
+                                        🛒 Add to Cart
 
-
-                                <!-- AVAILABILITY -->
-                                <div class="mt-6 border-t pt-5"
-                                     style="border-color:#F5D4D8;">
-
-                                    <span class="text-xs uppercase tracking-widest"
-                                          style="color:#A04460;">
-                                        ✦ Available in Collection
-                                    </span>
+                                    </button>
 
 
-                                    <!-- ADMIN BUTTONS -->
-                                    <% if (typeof isAdmin !== 'undefined' && isAdmin && book._id) { %>
+                                    <!-- BUY NOW -->
 
-                                        <div class="mt-5 flex flex-wrap gap-3">
+                                    <button
+                                        type="button"
+                                        class="buy-now-btn"
+                                        data-id="<%= bookId %>"
+                                        data-title="<%= bookTitle %>"
+                                        data-author="<%= bookAuthor %>"
+                                        data-price="<%= book.price %>"
+                                        data-image="<%= imagePath %>">
 
-                                            <a href="/books/edit/<%= book._id %>"
-                                               class="rounded-lg border px-4 py-2 text-xs uppercase tracking-widest transition hover:bg-[#F5D4D8]"
-                                               style="border-color:#A04460; color:#641E36;">
+                                        Buy Now →
 
-                                                Edit
-
-                                            </a>
-
-
-                                            <form action="/books/delete/<%= book._id %>"
-                                                  method="POST">
-
-                                                <button
-                                                    type="submit"
-                                                    onclick="return confirm('Are you sure you want to delete this book?')"
-                                                    class="rounded-lg px-4 py-2 text-xs uppercase tracking-widest text-white transition hover:opacity-80"
-                                                    style="background:#641E36;">
-
-                                                    Delete
-
-                                                </button>
-
-                                            </form>
-
-                                        </div>
-
-                                    <% } %>
+                                    </button>
 
                                 </div>
+
+
+                                <!-- ADMIN EDIT / DELETE -->
+
+                                <% if (typeof isAdmin !== 'undefined' && isAdmin && book._id) { %>
+
+                                    <div class="mt-5 flex flex-wrap gap-3 border-t pt-4"
+                                         style="border-color:#F2E3E5;">
+
+                                        <!-- EDIT -->
+
+                                        <a
+                                            href="/books/edit/<%= book._id %>"
+                                            class="admin-action edit-action">
+
+                                            Edit
+
+                                        </a>
+
+
+                                        <!-- DELETE -->
+
+                                        <form
+                                            action="/books/delete/<%= book._id %>"
+                                            method="POST">
+
+                                            <button
+                                                type="submit"
+                                                onclick="return confirm('Are you sure you want to delete this book?')"
+                                                class="admin-action delete-action">
+
+                                                Delete
+
+                                            </button>
+
+                                        </form>
+
+                                    </div>
+
+                                <% } %>
 
                             </div>
 
@@ -367,38 +855,32 @@
 
                     <% }) %>
 
-                </div>
+                </main>
+
 
             <% } else { %>
 
 
-                <!-- NO BOOKS FOUND -->
-                <div class="mx-auto max-w-xl rounded-2xl border bg-white px-8 py-16 text-center"
-                     style="border-color:#F5D4D8;">
+                <!-- EMPTY STATE -->
 
-                    <div class="mb-5 text-5xl" style="color:#A04460;">
+                <div class="empty-state">
+
+                    <div class="mb-5 text-5xl"
+                         style="color:#A04460;">
                         ❦
                     </div>
 
-                    <h2 class="font-display mb-3 text-4xl"
-                        style="color:#641E36;">
+                    <h2 class="font-display">
                         The Shelves Are Quiet
                     </h2>
 
-                    <p class="mb-7 text-sm leading-7"
-                       style="color:#A77C87;">
-
+                    <p>
                         There are currently no books in this category.
                         Try another category to discover your next favourite.
-
                     </p>
 
-                    <a href="/categories"
-                       class="inline-block rounded-lg px-6 py-3 text-xs uppercase tracking-widest text-white transition hover:opacity-80"
-                       style="background:#641E36;">
-
+                    <a href="/categories" class="primary-button">
                         View All Books
-
                     </a>
 
                 </div>
@@ -410,132 +892,100 @@
     </section>
 
 
-    <!-- CATEGORY COLLECTION -->
-    <section class="px-5 py-20 sm:px-8"
-             style="background:#ffa5ab;">
+    <!-- EDITORIAL READER SECTION -->
 
-        <div class="mx-auto max-w-6xl">
+    <section class="reader-section">
 
-            <div class="mb-12 text-center">
+        <div class="relative z-10 mx-auto max-w-6xl">
 
-                <p class="mb-4 text-xs uppercase tracking-[0.3em]"
-                   style="color:#450920;">
-                    The Bloom Reads Shelves
+            <div class="text-center">
+
+                <p class="reader-eyebrow">
+                    A Little Note for Every Reader
                 </p>
 
-                <h2 class="font-display text-5xl md:text-6xl"
-                    style="color:#450920;">
-                    Find Your Next World
+                <h2 class="reader-heading font-display">
+                    Every book opens a door to <em>somewhere new.</em>
                 </h2>
 
-                <div class="mt-5 flex items-center justify-center gap-3">
-                    <span class="h-px w-16" style="background:#A04460;"></span>
-                    <span style="color:#641E36;">✦</span>
-                    <span class="h-px w-16" style="background:#A04460;"></span>
+                <p class="reader-intro">
+                    Sometimes we read to escape, sometimes to understand,
+                    and sometimes to discover a part of ourselves we never knew.
+                    Whatever you are looking for, there is a story waiting for you.
+                </p>
+
+                <div class="reader-divider">
+
+                    <span></span>
+
+                    <span class="star">✦</span>
+
+                    <span></span>
+
                 </div>
 
             </div>
 
 
-            <div class="grid grid-cols-1 gap-px bg-[#A04460]/50 md:grid-cols-2 lg:grid-cols-3">
+            <!-- THREE TEXT COLUMNS -->
 
+            <div class="reader-columns">
 
-                <!-- FICTION -->
-                <a href="/categories/Fiction" class="shelf-card group">
+                <div class="reader-column">
 
-                    <span class="text-sm" style="color:#F5D4D8;">I</span>
+                    <span class="reader-number">01</span>
 
-                    <h3 class="font-display mt-3 mb-3 text-4xl text-white transition group-hover:translate-x-2">
-                        Fiction
+                    <h3 class="font-display">
+                        Discover
                     </h3>
 
-                    <p class="text-sm leading-6 text-white/70">
-                        Stories that take you beyond the ordinary.
+                    <p>
+                        Explore new ideas, unfamiliar places and stories
+                        that invite you to see the world differently.
                     </p>
 
-                </a>
+                </div>
 
 
-                <!-- ROMANCE -->
-                <a href="/categories/Romance" class="shelf-card group">
+                <div class="reader-column">
 
-                    <span class="text-sm" style="color:#F5D4D8;">II</span>
+                    <span class="reader-number">02</span>
 
-                    <h3 class="font-display mt-3 mb-3 text-4xl text-white transition group-hover:translate-x-2">
-                        Romance
+                    <h3 class="font-display">
+                        Feel
                     </h3>
 
-                    <p class="text-sm leading-6 text-white/70">
-                        Beautiful stories about love and relationships.
+                    <p>
+                        Find characters, emotions and little moments
+                        that stay with you long after the last page.
                     </p>
 
-                </a>
+                </div>
 
 
-                <!-- MYSTERY -->
-                <a href="/categories/Mystery" class="shelf-card group">
+                <div class="reader-column">
 
-                    <span class="text-sm" style="color:#F5D4D8;">III</span>
+                    <span class="reader-number">03</span>
 
-                    <h3 class="font-display mt-3 mb-3 text-4xl text-white transition group-hover:translate-x-2">
-                        Mystery
+                    <h3 class="font-display">
+                        Grow
                     </h3>
 
-                    <p class="text-sm leading-6 text-white/70">
-                        Secrets and surprises hidden between the pages.
+                    <p>
+                        Let every chapter bring a fresh perspective,
+                        a new thought or a little inspiration.
                     </p>
 
-                </a>
-
-
-                <!-- FANTASY -->
-                <a href="/categories/Fantasy" class="shelf-card group">
-
-                    <span class="text-sm" style="color:#F5D4D8;">IV</span>
-
-                    <h3 class="font-display mt-3 mb-3 text-4xl text-white transition group-hover:translate-x-2">
-                        Fantasy
-                    </h3>
-
-                    <p class="text-sm leading-6 text-white/70">
-                        Magical realms and extraordinary adventures.
-                    </p>
-
-                </a>
-
-
-                <!-- CLASSIC -->
-                <a href="/categories/Classic" class="shelf-card group">
-
-                    <span class="text-sm" style="color:#F5D4D8;">V</span>
-
-                    <h3 class="font-display mt-3 mb-3 text-4xl text-white transition group-hover:translate-x-2">
-                        Classics
-                    </h3>
-
-                    <p class="text-sm leading-6 text-white/70">
-                        Timeless books loved across generations.
-                    </p>
-
-                </a>
-
-
-                <!-- SELF-HELP -->
-                <a href="/categories/Self-Help" class="shelf-card group">
-
-                    <span class="text-sm" style="color:#F5D4D8;">VI</span>
-
-                    <h3 class="font-display mt-3 mb-3 text-4xl text-white transition group-hover:translate-x-2">
-                        Self-Help
-                    </h3>
-
-                    <p class="text-sm leading-6 text-white/70">
-                        Ideas to inspire learning, growth and new habits.
-                    </p>
-
-                </a>
+                </div>
 
             </div>
+
+
+            <p class="reader-quote font-display">
+                "A reader lives a thousand lives before the time they die."
+
+                <span>The magic of reading</span>
+            </p>
 
         </div>
 
@@ -543,7 +993,207 @@
 
 
     <!-- FOOTER -->
+
     <%- include('includes/footer.ejs') %>
 
+
+    <!-- CART JAVASCRIPT -->
+
+    <script>
+
+        // Get the cart from localStorage.
+        function getCart() {
+
+            try {
+                const cart = JSON.parse(
+                    localStorage.getItem("bloomReadsCart")
+                );
+
+                return Array.isArray(cart) ? cart : [];
+
+            } catch (error) {
+                return [];
+            }
+
+        }
+
+
+        // Save the cart and update the counter.
+        function saveCart(cart) {
+
+            localStorage.setItem(
+                "bloomReadsCart",
+                JSON.stringify(cart)
+            );
+
+            updateCartCounter();
+
+        }
+
+
+        // Update navbar cart counter.
+        function updateCartCounter() {
+
+            const cart = getCart();
+
+            const totalItems = cart.reduce(function (total, item) {
+
+                return total + Number(item.quantity || 0);
+
+            }, 0);
+
+            const counter = document.getElementById("cartCount");
+
+            if (counter) {
+
+                counter.textContent = totalItems;
+
+                counter.classList.toggle(
+                    "hidden",
+                    totalItems === 0
+                );
+
+            }
+
+        }
+
+
+        // Add a book to the cart.
+        function addBookToCart(button) {
+
+            const id = button.dataset.id;
+
+            const price = Number(button.dataset.price);
+
+            if (
+                !id ||
+                !Number.isFinite(price) ||
+                price < 0
+            ) {
+
+                alert("Sorry, this book could not be added.");
+
+                return null;
+
+            }
+
+            const book = {
+
+                id: id,
+
+                title: button.dataset.title,
+
+                author: button.dataset.author,
+
+                price: price,
+
+                image: button.dataset.image,
+
+                quantity: 1
+
+            };
+
+            const cart = getCart();
+
+            const existingBook = cart.find(function (item) {
+
+                return item.id === id;
+
+            });
+
+            if (existingBook) {
+
+                existingBook.quantity =
+                    Number(existingBook.quantity || 0) + 1;
+
+            } else {
+
+                cart.push(book);
+
+            }
+
+            saveCart(cart);
+
+            return book;
+
+        }
+
+
+        // Display cart success message.
+        function showCartMessage(message) {
+
+            const messageBox =
+                document.getElementById("cartMessage");
+
+            if (!messageBox) return;
+
+            messageBox.textContent = message;
+
+            messageBox.classList.remove("hidden");
+
+            window.scrollTo({
+
+                top: 0,
+
+                behavior: "smooth"
+
+            });
+
+            setTimeout(function () {
+
+                messageBox.classList.add("hidden");
+
+            }, 3000);
+
+        }
+
+
+        // Add to Cart button functionality.
+        document.querySelectorAll(".add-to-cart-btn")
+            .forEach(function (button) {
+
+                button.addEventListener("click", function () {
+
+                    const book = addBookToCart(button);
+
+                    if (book) {
+
+                        showCartMessage(
+                            "✓ " + book.title +
+                            " added to your cart!"
+                        );
+
+                    }
+
+                });
+
+            });
+
+
+        // Buy Now button functionality.
+        document.querySelectorAll(".buy-now-btn")
+            .forEach(function (button) {
+
+                button.addEventListener("click", function () {
+
+                    const book = addBookToCart(button);
+
+                    if (book) {
+
+                        window.location.href = "/cart";
+
+                    }
+
+                });
+
+            });
+
+
+        // Update the counter on page load.
+        updateCartCounter();
+
+    </script>
+
 </body>
+
 </html>
