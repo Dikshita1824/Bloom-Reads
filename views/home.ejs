@@ -126,58 +126,59 @@
 
 
     <!-- ABOUT SECTION -->
+<section class="px-6 py-14 md:py-16">
 
-    <section class="px-6 py-16">
+    <div class="mx-auto grid max-w-6xl items-center gap-8 md:grid-cols-2">
 
-        <div class="mx-auto grid max-w-6xl items-center gap-10 md:grid-cols-2">
+        <!-- LEFT IMAGE -->
+        <div class="w-full">
 
-            <div class="mx-auto w-full max-w-sm">
+            <img
+                src="/uploads/book-stack.jpg"
+                alt="A stack of books"
+                class="h-72 w-full rounded-2xl object-cover sm:h-80"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+            >
 
-                <img
-                    src="/uploads/book-stack.jpg"
-                    alt="A stack of books"
-                    class="h-72 w-full rounded-2xl object-cover"
-                    onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
-                >
-
-                <div class="hidden h-72 flex-col items-center justify-center rounded-2xl bg-[#ffa5ab]/50">
-                    <span class="text-6xl">📖</span>
-                    <p class="heading mt-3 text-xl">Happy Reading!</p>
-                </div>
-
-            </div>
-
-            <div>
-
-                <p class="mb-3 text-sm font-semibold uppercase tracking-widest text-[#a53860]">
-                    About Us
-                </p>
-
-                <h2 class="heading text-3xl sm:text-4xl">
-                    A little corner for every reader.
-                </h2>
-
-                <p class="mt-5 leading-7 text-[#450920]/75">
-                    Bloom Reads is an online bookstore made for people
-                    who enjoy reading and discovering new books.
-                </p>
-
-                <p class="mt-4 leading-7 text-[#450920]/75">
-                    From exciting fiction to educational books, we bring
-                    different genres together so you can easily find
-                    something interesting to read.
-                </p>
-
-                <a href="/about"
-                   class="pink-button mt-6 inline-block rounded-lg px-6 py-3 text-sm font-semibold">
-                    Learn More →
-                </a>
-
+            <div class="hidden h-72 flex-col items-center justify-center rounded-2xl bg-[#f9dbbd] sm:h-80">
+                <span class="text-6xl">📚</span>
+                <p class="heading mt-3 text-xl">Happy Reading!</p>
             </div>
 
         </div>
 
-    </section>
+        <!-- RIGHT CONTENT -->
+        <div class="md:pl-4">
+
+            <p class="mb-3 text-sm font-semibold uppercase tracking-widest text-[#a53860]">
+                About Us
+            </p>
+
+            <h2 class="heading text-3xl leading-snug sm:text-4xl">
+                A little corner for every reader.
+            </h2>
+
+            <p class="mt-5 leading-7 text-[#450920]/75">
+                Bloom Reads is an online bookstore made for people who
+                enjoy reading and discovering new books.
+            </p>
+
+            <p class="mt-4 leading-7 text-[#450920]/75">
+                From exciting fiction to educational books, we bring
+                different genres together so you can easily find
+                something interesting to read.
+            </p>
+
+            <a href="/about"
+               class="pink-button mt-6 inline-block rounded-lg px-6 py-3 text-sm font-semibold transition">
+                Learn More →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
 
 
     <!-- POPULAR CATEGORIES -->

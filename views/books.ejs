@@ -494,43 +494,40 @@
                             </div>
 
 
-                            <!-- CUSTOMER PURCHASE BUTTONS -->
+                            <% if (!isAdmin) { %>
 
-                            <div class="grid grid-cols-2 gap-3 mt-auto">
+    <!-- CUSTOMER PURCHASE BUTTONS -->
+    <div class="grid grid-cols-2 gap-3 mt-auto">
 
-                                <!-- ADD TO CART -->
+        <!-- ADD TO CART -->
+        <button
+            type="button"
+            class="add-to-cart-btn"
+            data-id="<%= bookId %>"
+            data-title="<%= book.title %>"
+            data-author="<%= book.author %>"
+            data-price="<%= book.price %>"
+            data-image="<%= book.image %>">
 
-                                <button
-                                    type="button"
-                                    class="add-to-cart-btn"
-                                    data-id="<%= bookId %>"
-                                    data-title="<%= book.title %>"
-                                    data-author="<%= book.author %>"
-                                    data-price="<%= book.price %>"
-                                    data-image="<%= book.image %>">
+            🛒 Add to Cart
+        </button>
 
-                                    🛒 Add to Cart
+        <!-- BUY NOW -->
+        <button
+            type="button"
+            class="buy-now-btn"
+            data-id="<%= bookId %>"
+            data-title="<%= book.title %>"
+            data-author="<%= book.author %>"
+            data-price="<%= book.price %>"
+            data-image="<%= book.image %>">
 
-                                </button>
+            Buy Now →
+        </button>
 
+    </div>
 
-                                <!-- BUY NOW -->
-
-                                <button
-                                    type="button"
-                                    class="buy-now-btn"
-                                    data-id="<%= bookId %>"
-                                    data-title="<%= book.title %>"
-                                    data-author="<%= book.author %>"
-                                    data-price="<%= book.price %>"
-                                    data-image="<%= book.image %>">
-
-                                    Buy Now →
-
-                                </button>
-
-                            </div>
-
+<% } %>
 
                             <!-- ADMIN EDIT / DELETE -->
 

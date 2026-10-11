@@ -1,25 +1,57 @@
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <nav class="bg-[#641E36] text-[#FFF9F5] px-5 md:px-8 py-4 shadow-md border-b border-[#F5D4D8]/30">
 
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
 
-        <!-- LOGO -->
+       <!-- LOGO -->
+<a href="/" class="bloom-logo-link">
+    <span class="bloom-logo-flower">❀</span>
 
-        <a href="/"
-           class="group flex items-center gap-2 no-underline">
+    <span class="bloom-logo-text">
+        Bloom <span>Reads</span>
+    </span>
+</a>
 
-            <span class="text-[#F5D4D8] text-xl group-hover:rotate-12 transition duration-300">
-                ❀
-            </span>
+<style>
+    .bloom-logo-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
+        text-decoration: none;
+    }
 
-            <span class="text-[27px] font-semibold tracking-wide text-[#FFF9F5] group-hover:text-[#F5D4D8] transition duration-300"
-                  style="font-family: 'Cormorant Garamond', Georgia, serif;">
+    .bloom-logo-flower {
+        color: #F5D4D8;
+        font-size: 24px;
+        transition: transform 0.3s ease;
+    }
 
-                Bloom <span class="italic text-[#F5D4D8]">Reads</span>
+    .bloom-logo-link:hover .bloom-logo-flower {
+        transform: rotate(12deg);
+    }
 
-            </span>
+    .bloom-logo-text {
+        font-family: 'Cormorant Garamond', Georgia, serif !important;
+        font-size: 30px;
+        font-weight: 600;
+        line-height: 1.2;
+        letter-spacing: 0.5px;
+        color: #FFF9F5;
+        white-space: nowrap;
+        transition: color 0.3s ease;
+    }
 
-        </a>
+    .bloom-logo-text span {
+        color: #F5D4D8;
+        font-style: italic;
+    }
 
+    .bloom-logo-link:hover .bloom-logo-text {
+        color: #F5D4D8;
+    }
+</style>
 
         <!-- NAVIGATION -->
 
