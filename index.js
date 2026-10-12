@@ -17,7 +17,7 @@ const session = require("express-session");
 // ===============================
 
 const ADMIN_USERNAME = "admin";
-const ADMIN_PASSWORD = "admin1234";
+const ADMIN_PASSWORD = "1234";
 
 
 // ===============================
