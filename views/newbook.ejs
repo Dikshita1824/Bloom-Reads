@@ -49,26 +49,15 @@
             padding: 45px 35px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .intro-icon {
-            width: 65px;
-            height: 65px;
-            border-radius: 15px;
-            background: #fffaf6;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-            margin-bottom: 25px;
+            justify-content: flex-start;
+            gap: 35px;
         }
 
         .book-decoration {
             background: #fffaf6;
             border-radius: 14px;
             padding: 25px;
-            margin-top: 35px;
+            margin-top: 0;
             border: 1px solid #f1d5d0;
         }
 
@@ -172,6 +161,7 @@
 
             .intro-panel {
                 padding: 30px;
+                gap: 25px;
             }
 
             .book-decoration {
@@ -193,7 +183,7 @@
                 padding: 24px 20px;
             }
 
-            .intro-panel h1 {
+            .intro-panel h2 {
                 font-size: 32px;
             }
         }
@@ -226,63 +216,68 @@
         <div class="addbook-layout">
 
             <!-- Left Introduction Panel -->
-            <div class="intro-panel">
+<div class="intro-panel">
 
-                <div>
-                    <div class="intro-icon">
-                        📚
-                    </div>
+    <!-- Introduction Section -->
+    <div class="intro-content">
 
-                    <p class="text-xs uppercase tracking-[2px] text-[#A04460] mb-3">
-                        Grow Your Library
-                    </p>
+        <p class="text-xs uppercase tracking-[2px] text-[#A04460] mb-3">
+            Grow Your Library
+        </p>
 
-                    <h2 class="text-4xl font-semibold leading-tight text-[#641E36]">
-                        Every book has a story.
-                    </h2>
+        <h2 class="text-4xl font-semibold leading-tight text-[#641E36]">
+            Every book has a story.
+        </h2>
 
-                    <p class="text-sm text-[#805D66] leading-7 mt-5">
-                        Add your favourite books to Bloom Reads and
-                        make them available for readers to discover.
-                        A few details are all you need to get started.
-                    </p>
-                </div>
+        <p class="text-sm text-[#805D66] leading-7 mt-5">
+            Add your favourite books to Bloom Reads and
+            make them available for readers to discover.
+            A few details are all you need to get started.
+        </p>
 
-                <!-- Simple Decoration -->
-                <div class="book-decoration">
+    </div>
 
-                    <p class="text-sm font-semibold text-[#641E36] mb-4">
-                        A little reading inspiration
-                    </p>
+    <!-- Separate Reading Inspiration Section -->
+    <div class="book-decoration">
 
-                    <div class="flex gap-3 items-start">
-                        <div class="text-2xl">🌷</div>
+        <p class="text-xs uppercase tracking-[2px] text-[#A04460] mb-3">
+            A little reading inspiration
+        </p>
 
-                        <div>
-                            <p class="text-sm font-semibold text-[#641E36]">
-                                One book at a time
-                            </p>
+        <h3 class="text-xl font-semibold text-[#641E36]"
+            style="font-family: 'Playfair Display', serif;">
+            One book at a time
+        </h3>
 
-                            <p class="text-xs text-[#947680] mt-1 leading-5">
-                                Add stories, share knowledge and
-                                keep your collection growing.
-                            </p>
-                        </div>
-                    </div>
+        <p class="text-sm text-[#805D66] leading-7 mt-3">
+            Add stories, share knowledge and keep your
+            collection growing.
+        </p>
 
-                    <div class="mt-6">
-                        <div class="book-line" style="width: 90%;"></div>
-                        <div class="book-line" style="width: 70%;"></div>
-                        <div class="book-line" style="width: 80%;"></div>
-                    </div>
+        <div class="mt-6 pt-5 border-t border-[#F1DFE0]">
 
-                </div>
+    <p class="text-xs uppercase tracking-[2px] text-[#A04460] mb-2">
+        A thought to remember
+    </p>
 
-                <p class="text-xs text-[#946D77] mt-7">
-                    Made with love for book lovers. ♡
-                </p>
+    <p class="text-sm leading-7 text-[#805D66]">
+        "A book is a doorway to a thousand different worlds."
+    </p>
 
-            </div>
+    <p class="text-xs text-[#947680] mt-3">
+        Every page holds a new possibility.
+    </p>
+
+</div>
+
+    </div>
+
+    <!-- Bottom Text -->
+    <p class="text-xs text-[#946D77]">
+        Made for book lovers.
+    </p>
+
+</div>
 
             <!-- Right Form Panel -->
             <div class="form-panel">
@@ -383,7 +378,6 @@
 
                     <!-- Book Cover -->
                     <div class="mb-7">
-
                         <label for="img" class="form-label">
                             Book Cover Image
                             <span class="text-[#A04460]">*</span>
@@ -402,18 +396,17 @@
                                 Choose an image from your device.
                             </p>
                         </div>
-
                     </div>
 
                     <!-- Submit Button -->
                     <button type="submit" class="submit-btn">
-                        + Add Book to Collection
+                        Add Book to Collection
                     </button>
 
                     <!-- Cancel Link -->
                     <div class="text-center mt-5">
                         <a href="/books" class="cancel-btn">
-                            ← Cancel and go back to books
+                            Cancel and go back to books
                         </a>
                     </div>
 

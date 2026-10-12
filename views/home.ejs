@@ -12,6 +12,10 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             background-color: #fff8f3;
@@ -24,20 +28,90 @@
         }
 
         .book-card {
-            transition: 0.2s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            min-width: 0;
+            padding: 28px;
+            border-radius: 16px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(69, 9, 32, 0.10);
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
         .book-card:hover {
             transform: translateY(-4px);
+            box-shadow: 0 8px 18px rgba(69, 9, 32, 0.12);
+        }
+
+        .category-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            min-height: 80px;
+            flex-shrink: 0;
+            margin-bottom: 22px;
+            padding: 8px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .category-label span {
+            font-family: 'Playfair Display', serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: #450920;
+            overflow-wrap: anywhere;
+        }
+
+        .book-card h3 {
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            line-height: 1.35;
+        }
+
+        .book-card .description {
+            margin-top: 12px;
+            margin-bottom: 0;
+            color: rgba(69, 9, 32, 0.75);
+            font-size: 16px;
+            line-height: 1.8;
+            overflow-wrap: break-word;
+        }
+
+        .book-card .explore-link {
+            margin-top: auto;
+            padding-top: 22px;
+            color: #a53860;
+            font-size: 16px;
+            font-weight: 700;
         }
 
         .pink-button {
             background-color: #a53860;
             color: white;
+            transition: background-color 0.2s ease;
         }
 
         .pink-button:hover {
             background-color: #450920;
+        }
+
+        @media (max-width: 640px) {
+            .book-card {
+                padding: 22px;
+            }
+
+            .book-card h3 {
+                font-size: 25px;
+            }
+
+            .book-card .description {
+                font-size: 15px;
+            }
         }
     </style>
 </head>
@@ -45,6 +119,7 @@
 <body>
 
     <%- include('includes/nav.ejs') %>
+
 
     <!-- HERO SECTION -->
 
@@ -86,6 +161,7 @@
 
             </div>
 
+
             <!-- HERO IMAGE -->
 
             <div class="mx-auto w-full max-w-md">
@@ -98,8 +174,11 @@
                 >
 
                 <div class="hidden h-[300px] flex-col items-center justify-center rounded-2xl bg-[#f9dbbd] sm:h-[380px]">
-                    <span class="text-7xl">📚</span>
-                    <p class="heading mt-4 text-2xl">A World of Stories</p>
+
+                    <p class="heading text-2xl text-[#450920]">
+                        A World of Stories
+                    </p>
+
                 </div>
 
             </div>
@@ -126,59 +205,62 @@
 
 
     <!-- ABOUT SECTION -->
-<section class="px-6 py-14 md:py-16">
 
-    <div class="mx-auto grid max-w-6xl items-center gap-8 md:grid-cols-2">
+    <section class="px-6 py-14 md:py-16">
 
-        <!-- LEFT IMAGE -->
-        <div class="w-full">
+        <div class="mx-auto grid max-w-6xl items-center gap-8 md:grid-cols-2">
 
-            <img
-                src="/uploads/book-stack.jpg"
-                alt="A stack of books"
-                class="h-72 w-full rounded-2xl object-cover sm:h-80"
-                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
-            >
+            <div class="w-full">
 
-            <div class="hidden h-72 flex-col items-center justify-center rounded-2xl bg-[#f9dbbd] sm:h-80">
-                <span class="text-6xl">📚</span>
-                <p class="heading mt-3 text-xl">Happy Reading!</p>
+                <img
+                    src="/uploads/book-stack.jpg"
+                    alt="A stack of books"
+                    class="h-72 w-full rounded-2xl object-cover sm:h-80"
+                    onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+                >
+
+                <div class="hidden h-72 flex-col items-center justify-center rounded-2xl bg-[#f9dbbd] sm:h-80">
+
+                    <p class="heading text-xl text-[#450920]">
+                        Happy Reading!
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="md:pl-4">
+
+                <p class="mb-3 text-sm font-semibold uppercase tracking-widest text-[#a53860]">
+                    About Us
+                </p>
+
+                <h2 class="heading text-3xl leading-snug sm:text-4xl">
+                    A little corner for every reader.
+                </h2>
+
+                <p class="mt-5 leading-7 text-[#450920]/75">
+                    Bloom Reads is an online bookstore made for people who
+                    enjoy reading and discovering new books.
+                </p>
+
+                <p class="mt-4 leading-7 text-[#450920]/75">
+                    From exciting fiction to educational books, we bring
+                    different genres together so you can easily find
+                    something interesting to read.
+                </p>
+
+                <a href="/about"
+                   class="pink-button mt-6 inline-block rounded-lg px-6 py-3 text-sm font-semibold">
+                    Learn More →
+                </a>
+
             </div>
 
         </div>
 
-        <!-- RIGHT CONTENT -->
-        <div class="md:pl-4">
-
-            <p class="mb-3 text-sm font-semibold uppercase tracking-widest text-[#a53860]">
-                About Us
-            </p>
-
-            <h2 class="heading text-3xl leading-snug sm:text-4xl">
-                A little corner for every reader.
-            </h2>
-
-            <p class="mt-5 leading-7 text-[#450920]/75">
-                Bloom Reads is an online bookstore made for people who
-                enjoy reading and discovering new books.
-            </p>
-
-            <p class="mt-4 leading-7 text-[#450920]/75">
-                From exciting fiction to educational books, we bring
-                different genres together so you can easily find
-                something interesting to read.
-            </p>
-
-            <a href="/about"
-               class="pink-button mt-6 inline-block rounded-lg px-6 py-3 text-sm font-semibold transition">
-                Learn More →
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
+    </section>
 
 
     <!-- POPULAR CATEGORIES -->
@@ -204,138 +286,136 @@
             </div>
 
 
-            <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <!-- Equal-height responsive category cards -->
 
-                <!-- Fiction -->
+            <div class="grid grid-cols-1 items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-3">
 
-                <a href="/categories/Fiction"
-                   class="book-card rounded-xl bg-white p-6 shadow-sm">
 
-                    <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-[#ffa5ab]/40 text-3xl">
-                        📚
+                <!-- FICTION -->
+
+                <a href="/categories/Fiction" class="book-card">
+
+                    <div class="category-label bg-[#ffa5ab]/40">
+                        <span>FICTION</span>
                     </div>
 
-                    <h3 class="heading text-2xl">Fiction</h3>
+                    <h3>Fiction</h3>
 
-                    <p class="mt-2 text-sm leading-6 text-[#450920]/70">
+                    <p class="description">
                         Enjoy imaginative stories and exciting adventures.
                     </p>
 
-                    <p class="mt-4 text-sm font-semibold text-[#a53860]">
+                    <p class="explore-link">
                         Explore Books →
                     </p>
 
                 </a>
 
 
-                <!-- Academics -->
+                <!-- ACADEMICS -->
 
-                <a href="/categories/Academics"
-                   class="book-card rounded-xl bg-white p-6 shadow-sm">
+                <a href="/categories/Academics" class="book-card">
 
-                    <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-[#f9dbbd] text-3xl">
-                        📖
+                    <div class="category-label bg-[#f9dbbd]">
+                        <span>STUDY</span>
                     </div>
 
-                    <h3 class="heading text-2xl">Academics</h3>
+                    <h3>Academics</h3>
 
-                    <p class="mt-2 text-sm leading-6 text-[#450920]/70">
+                    <p class="description">
                         Find educational books and helpful study material.
                     </p>
 
-                    <p class="mt-4 text-sm font-semibold text-[#a53860]">
+                    <p class="explore-link">
                         Explore Books →
                     </p>
 
                 </a>
 
 
-                <!-- Mystery -->
+                <!-- MYSTERY -->
 
-                <a href="/categories/Mystery"
-                   class="book-card rounded-xl bg-white p-6 shadow-sm">
+                <a href="/categories/Mystery" class="book-card">
 
-                    <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-[#a53860]/15 text-3xl">
-                        🔎
+                    <div class="category-label bg-[#a53860]/15">
+                        <span>MYSTERY</span>
                     </div>
 
-                    <h3 class="heading text-2xl">Mystery</h3>
+                    <h3>Mystery</h3>
 
-                    <p class="mt-2 text-sm leading-6 text-[#450920]/70">
+                    <p class="description">
                         Discover secrets, solve mysteries and enjoy surprises.
                     </p>
 
-                    <p class="mt-4 text-sm font-semibold text-[#a53860]">
+                    <p class="explore-link">
                         Explore Books →
                     </p>
 
                 </a>
 
 
-                <!-- Fantasy -->
+                <!-- FANTASY -->
 
-                <a href="/categories/Fantasy"
-                   class="book-card rounded-xl bg-white p-6 shadow-sm">
+                <a href="/categories/Fantasy" class="book-card">
 
-                    <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-[#ffa5ab]/40 text-3xl">
-                        ✨
+                    <div class="category-label bg-[#ffa5ab]/40">
+                        <span>FANTASY</span>
                     </div>
 
-                    <h3 class="heading text-2xl">Fantasy</h3>
+                    <h3>Fantasy</h3>
 
-                    <p class="mt-2 text-sm leading-6 text-[#450920]/70">
+                    <p class="description">
                         Step into magical worlds and extraordinary adventures.
                     </p>
 
-                    <p class="mt-4 text-sm font-semibold text-[#a53860]">
+                    <p class="explore-link">
                         Explore Books →
                     </p>
 
                 </a>
 
 
-                <!-- Science -->
+                <!-- SCIENCE -->
 
-                <a href="/categories/Science"
-                   class="book-card rounded-xl bg-white p-6 shadow-sm">
+                <a href="/categories/Science" class="book-card">
 
-                    <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-[#f9dbbd] text-3xl">
-                        🔬
+                    <div class="category-label bg-[#f9dbbd]">
+                        <span>SCIENCE</span>
                     </div>
 
-                    <h3 class="heading text-2xl">Science</h3>
+                    <h3>Science</h3>
 
-                    <p class="mt-2 text-sm leading-6 text-[#450920]/70">
+                    <p class="description">
                         Learn about science, discoveries and the world around us.
                     </p>
 
-                    <p class="mt-4 text-sm font-semibold text-[#a53860]">
+                    <p class="explore-link">
                         Explore Books →
                     </p>
 
                 </a>
 
 
-                <!-- Biography -->
+                <!-- POETRY -->
 
-                <a href="/categories/Biography"
-                   class="book-card rounded-xl bg-white p-6 shadow-sm">
+<a href="/categories/Poetry" class="book-card">
 
-                    <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-[#a53860]/15 text-3xl">
-                        💗
-                    </div>
+    <div class="category-label bg-[#a53860]/15">
+        <span>POETRY</span>
+    </div>
 
-                    <h3 class="heading text-2xl">Biography</h3>
+    <h3>Poetry</h3>
 
-                    <p class="mt-2 text-sm leading-6 text-[#450920]/70">
-                        Read about inspiring people and their life journeys.
-                    </p>
+    <p class="description">
+        Discover beautiful poems and heartfelt words.
+    </p>
 
-                    <p class="mt-4 text-sm font-semibold text-[#a53860]">
-                        Explore Books →
-                    </p>
+    <p class="explore-link">
+        Explore Books →
+    </p>
 
-                </a>
+</a>
+
 
             </div>
 
@@ -407,7 +487,10 @@
     </section>
 
 
+    <!-- FOOTER -->
+
     <%- include('includes/footer.ejs') %>
 
 </body>
+
 </html>

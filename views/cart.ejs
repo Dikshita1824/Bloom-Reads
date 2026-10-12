@@ -4,80 +4,61 @@
 <head>
 
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>My Cart - Bloom Reads</title>
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-</head>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
 
+</head>
 
 <body class="bg-[#FFF9F5] text-[#492632]">
 
+    <!-- NAVBAR -->
     <%- include('includes/nav.ejs') %>
 
 
     <!-- MAIN CART SECTION -->
-
     <section class="max-w-7xl mx-auto px-5 md:px-8 py-16">
 
-
         <!-- HEADING -->
-
         <div class="text-center mb-12">
 
             <p class="text-[#A04460] uppercase tracking-[0.3em] text-sm mb-4">
-
                 Your Favourite Reads
-
             </p>
 
             <h1 class="font-serif text-5xl md:text-6xl text-[#641E36]">
-
                 My Cart
-
             </h1>
 
             <p class="text-[#A77C87] mt-4">
-
                 Your next favourite book is waiting for you.
-
             </p>
 
         </div>
 
 
-        <!-- DECORATIVE LINE -->
-
-        <div class="flex items-center justify-center gap-3 mb-12">
-
-            <span class="h-px w-20 bg-[#F5D4D8]"></span>
-
-            <span class="text-[#A04460]">✦</span>
-
-            <span class="h-px w-20 bg-[#F5D4D8]"></span>
-
+        <!-- DECORATIVE DIVIDER -->
+        <div class="flex items-center justify-center mb-12">
+            <span class="h-px w-32 bg-[#F5D4D8]"></span>
         </div>
 
 
         <!-- CART CONTENT -->
-
         <div id="cartContainer"
              class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
-
             <!-- CART ITEMS -->
-
             <div id="cartItems"
                  class="lg:col-span-2 space-y-5">
-
             </div>
 
 
             <!-- ORDER SUMMARY -->
-
             <div id="orderSummary"
                  class="hidden lg:col-span-1">
 
@@ -85,63 +66,52 @@
                             rounded-2xl p-6 shadow-sm sticky top-6">
 
                     <h2 class="font-serif text-3xl text-[#641E36] mb-6">
-
                         Order Summary
-
                     </h2>
 
 
+                    <!-- TOTAL ITEMS -->
                     <div class="flex justify-between items-center mb-4">
 
                         <span class="text-[#A77C87]">
-
                             Total Items
-
                         </span>
 
                         <span id="totalItems"
                               class="font-semibold text-[#641E36]">
-
                             0
-
                         </span>
 
                     </div>
 
 
+                    <!-- SUBTOTAL -->
                     <div class="flex justify-between items-center mb-5">
 
                         <span class="text-[#A77C87]">
-
                             Subtotal
-
                         </span>
 
                         <span id="subtotal"
                               class="font-semibold text-[#641E36]">
-
                             ₹0
-
                         </span>
 
                     </div>
 
 
+                    <!-- TOTAL AMOUNT -->
                     <div class="border-t border-[#F5D4D8] pt-5">
 
                         <div class="flex justify-between items-center gap-3">
 
                             <span class="font-semibold text-[#492632]">
-
                                 Total Amount
-
                             </span>
 
                             <span id="grandTotal"
                                   class="font-bold text-2xl text-[#641E36]">
-
                                 ₹0
-
                             </span>
 
                         </div>
@@ -150,7 +120,6 @@
 
 
                     <!-- CHECKOUT BUTTON -->
-
                     <button
                         type="button"
                         id="checkoutBtn"
@@ -166,9 +135,7 @@
 
 
                     <p class="text-xs text-center text-[#A77C87] mt-4">
-
                         Delivery charges, if any, are not included.
-
                     </p>
 
                 </div>
@@ -179,26 +146,18 @@
 
 
         <!-- EMPTY CART -->
-
         <div id="emptyCart"
-             class="hidden text-center py-12">
+             class="hidden text-center py-16 px-5">
 
-            <div class="text-6xl mb-6">
+            <h2 class="font-serif text-3xl md:text-4xl
+                       text-[#641E36] mb-4">
 
-                🛍️
-
-            </div>
-
-            <h2 class="font-serif text-3xl text-[#641E36] mb-4">
-
-                Your cart is empty
+                Your Cart Is Empty
 
             </h2>
 
             <p class="text-[#A77C87] mb-8">
-
                 Looks like you haven't added any books yet.
-
             </p>
 
             <a href="/books"
@@ -207,7 +166,7 @@
                       hover:bg-[#A04460]
                       transition duration-300">
 
-                Explore Books →
+                Explore Books 
 
             </a>
 
@@ -215,7 +174,6 @@
 
 
         <!-- CONTINUE SHOPPING -->
-
         <div class="mt-10">
 
             <a href="/books"
@@ -223,7 +181,7 @@
                       hover:text-[#A04460]
                       font-semibold transition duration-300">
 
-                ← Continue Shopping
+              ←  Continue Shopping
 
             </a>
 
@@ -233,19 +191,16 @@
 
 
     <!-- FOOTER -->
-
     <%- include('includes/footer.ejs') %>
 
 
     <!-- CART JAVASCRIPT -->
-
     <script>
 
         const CART_KEY = "bloomReadsCart";
 
 
-        // Read cart data safely.
-
+        // Read cart data safely
         function getCart() {
 
             try {
@@ -263,8 +218,7 @@
         }
 
 
-        // Save cart data.
-
+        // Save cart data
         function saveCart(cart) {
 
             localStorage.setItem(CART_KEY, JSON.stringify(cart));
@@ -274,15 +228,17 @@
         }
 
 
-        // Update navbar counter.
-
+        // Update navbar cart counter
         function updateCartCounter() {
 
             const cart = getCart();
 
             const count = cart.reduce(function (total, item) {
 
-                return total + Math.max(0, Number(item.quantity) || 0);
+                return total + Math.max(
+                    0,
+                    Number(item.quantity) || 0
+                );
 
             }, 0);
 
@@ -294,13 +250,14 @@
 
                 counter.classList.toggle("hidden", count === 0);
 
+                counter.classList.toggle("flex", count > 0);
+
             }
 
         }
 
 
-        // Format prices in Indian currency format.
-
+        // Format price in Indian currency
         function formatPrice(price) {
 
             return "₹" + Number(price).toLocaleString("en-IN", {
@@ -310,14 +267,14 @@
         }
 
 
-        // Create a cart item element safely.
-
-        function createCartItem(item, index) {
+        // Create cart item
+        function createCartItem(item) {
 
             const card = document.createElement("div");
 
             card.className =
-                "bg-white border border-[#F5D4D8] rounded-2xl p-5 shadow-sm";
+                "bg-white border border-[#F5D4D8] " +
+                "rounded-2xl p-5 shadow-sm";
 
 
             const row = document.createElement("div");
@@ -325,100 +282,113 @@
             row.className = "flex flex-col sm:flex-row gap-5";
 
 
-            // Book image.
-
+            // Book image
             const image = document.createElement("img");
 
-            image.src = item.image || "https://placehold.co/150x200/FBE8DF/641E36?text=Book";
+            image.src = item.image ||
+                "https://placehold.co/150x200/FBE8DF/641E36?text=Book";
 
             image.alt = item.title || "Book cover";
 
             image.className =
-                "w-32 h-44 object-contain rounded-xl bg-[#FBE8DF] mx-auto sm:mx-0";
+                "w-32 h-44 object-contain rounded-xl " +
+                "bg-[#FBE8DF] mx-auto sm:mx-0";
 
             image.onerror = function () {
 
                 this.onerror = null;
 
-                this.src = "https://placehold.co/150x200/FBE8DF/641E36?text=Book";
+                this.src =
+                    "https://placehold.co/150x200/FBE8DF/641E36?text=Book";
 
             };
 
 
-            // Details container.
-
+            // Book details
             const details = document.createElement("div");
 
             details.className = "flex-1";
 
 
-            // Book title.
-
+            // Title
             const title = document.createElement("h2");
 
-            title.className = "font-serif text-2xl text-[#641E36]";
+            title.className =
+                "font-serif text-2xl text-[#641E36]";
 
             title.textContent = item.title || "Untitled Book";
 
 
-            // Author.
-
+            // Author
             const author = document.createElement("p");
 
-            author.className = "text-sm text-[#A77C87] mt-2";
+            author.className =
+                "text-sm text-[#A77C87] mt-2";
 
-            author.textContent = "By " + (item.author || "Unknown Author");
+            author.textContent =
+                "By " + (item.author || "Unknown Author");
 
 
-            // Price.
-
+            // Price
             const price = document.createElement("p");
 
-            price.className = "font-bold text-lg text-[#641E36] mt-3";
+            price.className =
+                "font-bold text-lg text-[#641E36] mt-3";
 
             price.textContent = formatPrice(item.price);
 
 
-            // Quantity controls.
-
+            // Quantity controls
             const controls = document.createElement("div");
 
-            controls.className = "flex flex-wrap items-center gap-3 mt-5";
+            controls.className =
+                "flex flex-wrap items-center gap-3 mt-5";
 
 
+            // Decrease quantity button
             const decreaseBtn = document.createElement("button");
 
             decreaseBtn.type = "button";
 
             decreaseBtn.textContent = "−";
 
-            decreaseBtn.setAttribute("aria-label", "Decrease quantity");
+            decreaseBtn.setAttribute(
+                "aria-label",
+                "Decrease quantity"
+            );
 
             decreaseBtn.className =
                 "w-9 h-9 rounded-lg border border-[#F5D4D8] " +
                 "text-[#641E36] text-xl hover:bg-[#F5D4D8]";
 
 
+            // Quantity
             const quantity = document.createElement("span");
 
-            quantity.className = "font-semibold text-[#641E36]";
+            quantity.className =
+                "font-semibold text-[#641E36]";
 
             quantity.textContent = item.quantity;
 
 
+            // Increase quantity button
             const increaseBtn = document.createElement("button");
 
             increaseBtn.type = "button";
 
             increaseBtn.textContent = "+";
 
-            increaseBtn.setAttribute("aria-label", "Increase quantity");
+            increaseBtn.setAttribute(
+                "aria-label",
+                "Increase quantity"
+            );
 
             increaseBtn.className =
                 "w-9 h-9 rounded-lg bg-[#641E36] " +
                 "text-white text-xl hover:bg-[#A04460]";
 
 
+            // Remove button
             const removeBtn = document.createElement("button");
 
             removeBtn.type = "button";
@@ -430,20 +400,20 @@
                 "underline hover:text-[#641E36]";
 
 
-            // Item subtotal.
-
+            // Item subtotal
             const itemSubtotal = document.createElement("p");
 
             itemSubtotal.className =
                 "font-semibold text-[#492632] mt-4";
 
             itemSubtotal.textContent =
-                "Item total: " +
-                formatPrice(Number(item.price) * Number(item.quantity));
+                "Item Total: " +
+                formatPrice(
+                    Number(item.price) * Number(item.quantity)
+                );
 
 
-            // Decrease quantity.
-
+            // Decrease quantity
             decreaseBtn.addEventListener("click", function () {
 
                 changeQuantity(item.id, -1);
@@ -451,8 +421,7 @@
             });
 
 
-            // Increase quantity.
-
+            // Increase quantity
             increaseBtn.addEventListener("click", function () {
 
                 changeQuantity(item.id, 1);
@@ -460,8 +429,7 @@
             });
 
 
-            // Remove item.
-
+            // Remove item
             removeBtn.addEventListener("click", function () {
 
                 removeItem(item.id);
@@ -469,6 +437,7 @@
             });
 
 
+            // Append quantity controls
             controls.appendChild(decreaseBtn);
 
             controls.appendChild(quantity);
@@ -478,6 +447,7 @@
             controls.appendChild(removeBtn);
 
 
+            // Append details
             details.appendChild(title);
 
             details.appendChild(author);
@@ -489,6 +459,7 @@
             details.appendChild(itemSubtotal);
 
 
+            // Append image and details
             row.appendChild(image);
 
             row.appendChild(details);
@@ -501,27 +472,30 @@
         }
 
 
-        // Render cart items.
-
+        // Render cart
         function renderCart() {
 
             const cart = getCart();
 
-            const cartItems = document.getElementById("cartItems");
+            const cartItems =
+                document.getElementById("cartItems");
 
-            const emptyCart = document.getElementById("emptyCart");
+            const emptyCart =
+                document.getElementById("emptyCart");
 
-            const orderSummary = document.getElementById("orderSummary");
+            const orderSummary =
+                document.getElementById("orderSummary");
+
 
             cartItems.replaceChildren();
 
 
-            // Keep only valid items.
-
+            // Validate cart items
             const validCart = cart.filter(function (item) {
 
                 return item &&
-                    item.id &&
+                    item.id !== undefined &&
+                    item.id !== null &&
                     Number.isFinite(Number(item.price)) &&
                     Number(item.price) >= 0 &&
                     Number.isFinite(Number(item.quantity)) &&
@@ -530,6 +504,7 @@
             });
 
 
+            // Save cleaned cart
             if (validCart.length !== cart.length) {
 
                 saveCart(validCart);
@@ -537,8 +512,7 @@
             }
 
 
-            // Empty cart state.
-
+            // Show empty cart
             if (validCart.length === 0) {
 
                 emptyCart.classList.remove("hidden");
@@ -557,33 +531,45 @@
             orderSummary.classList.remove("hidden");
 
 
-            // Render each book.
+            // Display each item
+            validCart.forEach(function (item) {
 
-            validCart.forEach(function (item, index) {
-
-                cartItems.appendChild(createCartItem(item, index));
+                cartItems.appendChild(
+                    createCartItem(item)
+                );
 
             });
 
 
-            // Calculate totals.
+            // Calculate total quantity
+            const totalItems = validCart.reduce(
+                function (total, item) {
 
-            const totalItems = validCart.reduce(function (total, item) {
+                    return total + Number(item.quantity);
 
-                return total + Number(item.quantity);
-
-            }, 0);
-
-
-            const totalPrice = validCart.reduce(function (total, item) {
-
-                return total +
-                    (Number(item.price) * Number(item.quantity));
-
-            }, 0);
+                },
+                0
+            );
 
 
-            document.getElementById("totalItems").textContent = totalItems;
+            // Calculate total price
+            const totalPrice = validCart.reduce(
+                function (total, item) {
+
+                    return total +
+                        (
+                            Number(item.price) *
+                            Number(item.quantity)
+                        );
+
+                },
+                0
+            );
+
+
+            // Update summary
+            document.getElementById("totalItems").textContent =
+                totalItems;
 
             document.getElementById("subtotal").textContent =
                 formatPrice(totalPrice);
@@ -597,15 +583,14 @@
         }
 
 
-        // Change quantity.
-
+        // Change quantity
         function changeQuantity(id, amount) {
 
             const cart = getCart();
 
             const item = cart.find(function (book) {
 
-                return book.id === id;
+                return String(book.id) === String(id);
 
             });
 
@@ -616,11 +601,12 @@
             item.quantity = Number(item.quantity) + amount;
 
 
+            // Remove item if quantity becomes zero
             if (item.quantity <= 0) {
 
                 const updatedCart = cart.filter(function (book) {
 
-                    return book.id !== id;
+                    return String(book.id) !== String(id);
 
                 });
 
@@ -638,17 +624,17 @@
         }
 
 
-        // Remove an item.
-
+        // Remove item from cart
         function removeItem(id) {
 
             const cart = getCart();
 
             const updatedCart = cart.filter(function (item) {
 
-                return item.id !== id;
+                return String(item.id) !== String(id);
 
             });
+
 
             saveCart(updatedCart);
 
@@ -657,19 +643,30 @@
         }
 
 
-        // Checkout placeholder.
+        // Checkout button
+        document.getElementById("checkoutBtn")
+            .addEventListener("click", function () {
 
-        document.getElementById("checkoutBtn").addEventListener("click", function () {
+                alert(
+                    "Your cart is ready! Online checkout and payment have not been configured yet."
+                );
 
-            alert(
-                "Your cart is ready! Online checkout and payment have not been configured yet."
-            );
+            });
+
+
+        // Update cart when another browser tab changes it
+        window.addEventListener("storage", function (event) {
+
+            if (event.key === CART_KEY) {
+
+                renderCart();
+
+            }
 
         });
 
 
-        // Render when page opens.
-
+        // Render cart when page loads
         renderCart();
 
     </script>

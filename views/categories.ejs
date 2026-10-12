@@ -70,7 +70,7 @@
             transform: translateY(-2px);
         }
 
-        /* BOOK CARDS - MATCHING BOOKS.EJS */
+        /* BOOK CARDS */
 
         .book-card {
             display: flex;
@@ -111,23 +111,6 @@
 
         .book-card:hover .book-image {
             transform: scale(1.05) rotate(-1deg);
-        }
-
-        .book-number {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            z-index: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            background: rgba(255, 249, 245, 0.92);
-            color: var(--burgundy);
-            font-size: 12px;
-            font-weight: 600;
         }
 
         .category-badge {
@@ -319,19 +302,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 14px;
             margin: 27px 0 45px;
         }
 
-        .reader-divider span:not(.star) {
+        .reader-divider span {
             width: 65px;
             height: 1px;
             background: #DDB8C0;
-        }
-
-        .reader-divider .star {
-            color: var(--rose);
-            font-size: 17px;
         }
 
         .reader-columns {
@@ -529,13 +506,8 @@
             </h1>
 
             <div class="my-6 flex items-center justify-center gap-4">
-
                 <span class="h-px w-20" style="background:#F5D4D8;"></span>
-
-                <span style="color:#A04460;">✦</span>
-
                 <span class="h-px w-20" style="background:#F5D4D8;"></span>
-
             </div>
 
             <p class="mx-auto max-w-xl text-sm leading-7"
@@ -599,7 +571,6 @@
 
         <div class="mx-auto max-w-7xl">
 
-
             <!-- SECTION HEADING -->
 
             <div class="mb-5 text-center">
@@ -623,16 +594,11 @@
             </div>
 
 
-            <!-- DECORATIVE LINE -->
+            <!-- DECORATIVE LINE WITHOUT ICONS -->
 
             <div class="mb-12 flex items-center justify-center gap-3">
-
                 <span class="h-px w-20" style="background:#F5D4D8;"></span>
-
-                <span style="color:#A04460;">✦</span>
-
                 <span class="h-px w-20" style="background:#F5D4D8;"></span>
-
             </div>
 
 
@@ -648,12 +614,11 @@
 
             <% if (books && books.length > 0) { %>
 
-
                 <!-- BOOK GRID -->
 
                 <main class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
 
-                    <% books.forEach((book, index) => { %>
+                    <% books.forEach((book) => { %>
 
                         <%
                             const bookId = book._id
@@ -671,19 +636,13 @@
                             const bookAuthor = book.author || 'Unknown Author';
                         %>
 
-
                         <!-- BOOK CARD -->
 
                         <article class="book-card">
 
-
-                            <!-- BOOK COVER -->
+                            <!-- BOOK COVER WITHOUT NUMBER BADGE -->
 
                             <div class="book-cover-area">
-
-                                <span class="book-number">
-                                    <%= String(index + 1).padStart(2, '0') %>
-                                </span>
 
                                 <img
                                     src="<%= imagePath || 'https://placehold.co/400x550/FBE8DF/641E36?text=Bloom+Reads' %>"
@@ -698,7 +657,6 @@
                             <!-- BOOK DETAILS -->
 
                             <div class="flex flex-1 flex-col p-5 md:p-6">
-
 
                                 <!-- CATEGORY BADGE -->
 
@@ -759,7 +717,7 @@
                                     <div class="text-right">
 
                                         <p class="availability-label">
-                                            ✦ Available
+                                            Available
                                         </p>
 
                                         <p class="mt-1 text-xs"
@@ -787,7 +745,7 @@
                                         data-price="<%= book.price %>"
                                         data-image="<%= imagePath %>">
 
-                                        🛒 Add to Cart
+                                        Add to Cart
 
                                     </button>
 
@@ -803,7 +761,7 @@
                                         data-price="<%= book.price %>"
                                         data-image="<%= imagePath %>">
 
-                                        Buy Now →
+                                        Buy Now
 
                                     </button>
 
@@ -860,15 +818,9 @@
 
             <% } else { %>
 
-
-                <!-- EMPTY STATE -->
+                <!-- EMPTY STATE WITHOUT ICON -->
 
                 <div class="empty-state">
-
-                    <div class="mb-5 text-5xl"
-                         style="color:#A04460;">
-                        ❦
-                    </div>
 
                     <h2 class="font-display">
                         The Shelves Are Quiet
@@ -915,13 +867,8 @@
                 </p>
 
                 <div class="reader-divider">
-
                     <span></span>
-
-                    <span class="star">✦</span>
-
                     <span></span>
-
                 </div>
 
             </div>
@@ -1119,7 +1066,7 @@
         }
 
 
-        // Display cart success message.
+        // Display cart success message without an icon.
         function showCartMessage(message) {
 
             const messageBox =
@@ -1159,8 +1106,7 @@
                     if (book) {
 
                         showCartMessage(
-                            "✓ " + book.title +
-                            " added to your cart!"
+                            book.title + " added to your cart!"
                         );
 
                     }

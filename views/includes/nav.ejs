@@ -4,57 +4,44 @@
 
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
 
-       <!-- LOGO -->
-<a href="/" class="bloom-logo-link">
-    <span class="bloom-logo-flower">❀</span>
+        <!-- LOGO -->
+        <a href="/" class="bloom-logo-link">
+            <span class="bloom-logo-text">
+                Bloom <span>Reads</span>
+            </span>
+        </a>
 
-    <span class="bloom-logo-text">
-        Bloom <span>Reads</span>
-    </span>
-</a>
+        <style>
+            .bloom-logo-link {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                flex-shrink: 0;
+                text-decoration: none;
+            }
 
-<style>
-    .bloom-logo-link {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        flex-shrink: 0;
-        text-decoration: none;
-    }
+            .bloom-logo-text {
+                font-family: 'Cormorant Garamond', Georgia, serif !important;
+                font-size: 30px;
+                font-weight: 600;
+                line-height: 1.2;
+                letter-spacing: 0.5px;
+                color: #FFF9F5;
+                white-space: nowrap;
+                transition: color 0.3s ease;
+            }
 
-    .bloom-logo-flower {
-        color: #F5D4D8;
-        font-size: 24px;
-        transition: transform 0.3s ease;
-    }
+            .bloom-logo-text span {
+                color: #F5D4D8;
+                font-style: italic;
+            }
 
-    .bloom-logo-link:hover .bloom-logo-flower {
-        transform: rotate(12deg);
-    }
-
-    .bloom-logo-text {
-        font-family: 'Cormorant Garamond', Georgia, serif !important;
-        font-size: 30px;
-        font-weight: 600;
-        line-height: 1.2;
-        letter-spacing: 0.5px;
-        color: #FFF9F5;
-        white-space: nowrap;
-        transition: color 0.3s ease;
-    }
-
-    .bloom-logo-text span {
-        color: #F5D4D8;
-        font-style: italic;
-    }
-
-    .bloom-logo-link:hover .bloom-logo-text {
-        color: #F5D4D8;
-    }
-</style>
+            .bloom-logo-link:hover .bloom-logo-text {
+                color: #F5D4D8;
+            }
+        </style>
 
         <!-- NAVIGATION -->
-
         <div class="flex flex-wrap justify-center items-center gap-1">
 
             <a href="/"
@@ -82,9 +69,7 @@
                 Contact
             </a>
 
-
             <!-- CART BUTTON -->
-
             <a href="/cart"
                class="relative ml-2 px-4 py-2 rounded-full
                       bg-[#FFF9F5] text-[#641E36]
@@ -93,12 +78,12 @@
                       hover:bg-[#F5D4D8]
                       transition duration-300">
 
-                🛒 Cart
+                Cart
 
                 <span id="cartCount"
                       class="hidden absolute -top-2 -right-2
                              min-w-5 h-5 px-1
-                             flex items-center justify-center
+                             items-center justify-center
                              rounded-full bg-[#E9A4B2]
                              text-[#641E36] text-xs font-bold
                              border border-white">
@@ -107,24 +92,34 @@
 
             </a>
 
-
             <!-- ADMIN -->
-
             <% if (isAdmin) { %>
 
                 <a href="/books"
-                   class="ml-2 px-4 py-2 rounded-full bg-[#F5D4D8] text-[#641E36] text-[13px] font-semibold border border-[#F5D4D8] hover:bg-[#FFF9F5] hover:border-[#FFF9F5] transition duration-300">
+                   class="ml-2 px-4 py-2 rounded-full
+                          bg-[#F5D4D8] text-[#641E36]
+                          text-[13px] font-semibold
+                          border border-[#F5D4D8]
+                          hover:bg-[#FFF9F5]
+                          hover:border-[#FFF9F5]
+                          transition duration-300">
 
-                    ✦ Admin Panel
+                    Admin Panel
 
                 </a>
 
             <% } else { %>
 
                 <a href="/admin/login"
-                   class="ml-2 px-4 py-2 rounded-full bg-[#F5D4D8] text-[#641E36] text-[13px] font-semibold border border-[#F5D4D8] hover:bg-[#FFF9F5] hover:border-[#FFF9F5] transition duration-300">
+                   class="ml-2 px-4 py-2 rounded-full
+                          bg-[#F5D4D8] text-[#641E36]
+                          text-[13px] font-semibold
+                          border border-[#F5D4D8]
+                          hover:bg-[#FFF9F5]
+                          hover:border-[#FFF9F5]
+                          transition duration-300">
 
-                    ✦ Admin
+                    Admin
 
                 </a>
 
@@ -138,9 +133,7 @@
 
 
 <!-- CART COUNTER SCRIPT -->
-
 <script>
-
     function updateCartCounter() {
 
         let cart = [];
@@ -158,15 +151,14 @@
         const counter = document.getElementById("cartCount");
 
         if (counter) {
-
             counter.textContent = totalItems;
 
             counter.classList.toggle("hidden", totalItems === 0);
-
+            counter.classList.toggle("flex", totalItems > 0);
         }
-
     }
 
     updateCartCounter();
 
+    window.addEventListener("storage", updateCartCounter);
 </script>

@@ -92,6 +92,7 @@
             font-size: 23px;
             line-height: 1.3;
             font-weight: 500;
+            overflow-wrap: anywhere;
         }
 
         .book-author {
@@ -118,6 +119,7 @@
             align-items: center;
             justify-content: center;
             border-radius: 9px;
+            padding: 10px 8px;
             font-size: 12px;
             font-weight: 600;
             transition: all 0.25s ease;
@@ -300,7 +302,6 @@
             : defaultBooks;
     %>
 
-
     <!-- ADMIN CONTROLS -->
 
     <% if (isAdmin) { %>
@@ -308,21 +309,12 @@
         <div class="max-w-7xl mx-auto px-6 flex flex-wrap justify-end gap-3 mt-6">
 
             <a href="/books/new"
-               class="bg-[#641E36] text-[#FFF9F5]
-                      px-5 py-3 rounded-lg
-                      uppercase tracking-wider text-sm
-                      hover:bg-[#A04460]
-                      transition duration-300">
-                + Add Book
+               class="bg-[#641E36] text-[#FFF9F5] px-5 py-3 rounded-lg uppercase tracking-wider text-sm hover:bg-[#A04460] transition duration-300">
+                Add Book
             </a>
 
             <a href="/admin/logout"
-               class="border border-[#641E36]
-                      text-[#641E36]
-                      px-5 py-3 rounded-lg
-                      uppercase tracking-wider text-sm
-                      hover:bg-[#641E36] hover:text-white
-                      transition duration-300">
+               class="border border-[#641E36] text-[#641E36] px-5 py-3 rounded-lg uppercase tracking-wider text-sm hover:bg-[#641E36] hover:text-white transition duration-300">
                 Logout
             </a>
 
@@ -330,63 +322,44 @@
 
     <% } %>
 
-
     <!-- BOOK COLLECTION -->
 
-    <section class="px-5 md:px-8 py-14 md:py-16">
+    <section class="px-5 md:px-8 py-10 md:py-12">
 
         <div class="max-w-7xl mx-auto">
-
 
             <!-- HEADING -->
 
             <div class="mb-6">
 
-                <p class="text-center text-[#A04460]
-                          uppercase tracking-[0.3em]
-                          text-xs md:text-sm mb-4">
+                <p class="text-center text-[#A04460] uppercase tracking-[0.3em] text-xs md:text-sm mb-4">
                     Discover Your Next Favourite
                 </p>
 
-                <h1 class="text-center font-serif
-                           text-5xl md:text-6xl
-                           text-[#641E36]">
+                <h1 class="text-center font-serif text-5xl md:text-6xl text-[#641E36]">
                     Our Books
                 </h1>
 
-                <p class="text-center text-[#A77C87] mt-5
-                          max-w-2xl mx-auto leading-7 text-sm md:text-base">
+                <p class="text-center text-[#A77C87] mt-5 max-w-2xl mx-auto leading-7 text-sm md:text-base">
                     Every book opens a new world.
                     Find your next beautiful read at Bloom Reads.
                 </p>
 
             </div>
 
+            <!-- DECORATIVE LINE WITHOUT ICONS -->
 
-            <!-- DECORATIVE LINE -->
-
-            <div class="flex items-center justify-center gap-3 mb-12">
-
-                <span class="h-px w-16 md:w-20 bg-[#F0CDD4]"></span>
-
-                <span class="text-[#A04460] text-sm">✦</span>
-
-                <span class="h-px w-16 md:w-20 bg-[#F0CDD4]"></span>
-
+            <div class="flex items-center justify-center mb-10">
+                <span class="h-px w-24 bg-[#F0CDD4]"></span>
             </div>
-
 
             <!-- SUCCESS MESSAGE -->
 
             <div id="cartMessage"
                  role="status"
                  aria-live="polite"
-                 class="hidden max-w-2xl mx-auto mb-8
-                        bg-[#FBE8EB] text-[#641E36]
-                        border border-[#E8C4CD]
-                        rounded-xl px-5 py-4 text-center text-sm">
+                 class="hidden max-w-2xl mx-auto mb-8 bg-[#FBE8EB] text-[#641E36] border border-[#E8C4CD] rounded-xl px-5 py-4 text-center text-sm">
             </div>
-
 
             <!-- BOOK GRID -->
 
@@ -400,11 +373,7 @@
                             : 'default-' + encodeURIComponent(book.title);
                     %>
 
-
-                    <!-- BOOK CARD -->
-
                     <article class="book-card flex flex-col">
-
 
                         <!-- BOOK COVER -->
 
@@ -422,34 +391,21 @@
 
                         </div>
 
-
                         <!-- BOOK DETAILS -->
 
                         <div class="p-5 md:p-6 flex flex-col flex-1">
 
-
-                            <!-- CATEGORY -->
-
                             <div class="mb-4">
-
                                 <span class="category-badge">
                                     <%= book.category || 'Books' %>
                                 </span>
-
                             </div>
-
-
-                            <!-- TITLE -->
 
                             <h2 class="book-title mb-3">
                                 <%= book.title %>
                             </h2>
 
-
-                            <!-- AUTHOR -->
-
                             <p class="book-author mb-5">
-
                                 <span class="text-[#492632] font-semibold">
                                     Written by
                                 </span>
@@ -457,9 +413,7 @@
                                 <br>
 
                                 <%= book.author %>
-
                             </p>
-
 
                             <!-- PRICE SECTION -->
 
@@ -468,7 +422,6 @@
                             <div class="flex items-center justify-between gap-3 mb-5">
 
                                 <div>
-
                                     <p class="text-[#A77C87] text-xs mb-1">
                                         Price
                                     </p>
@@ -476,66 +429,61 @@
                                     <p class="book-price">
                                         ₹<%= book.price %>
                                     </p>
-
                                 </div>
 
                                 <div class="text-right">
-
                                     <p class="availability-label">
-                                        ✦ Available
+                                        Available
                                     </p>
 
                                     <p class="text-[#B58B96] text-xs mt-1">
                                         In our collection
                                     </p>
-
                                 </div>
 
                             </div>
 
+                            <!-- CUSTOMER PURCHASE BUTTONS -->
 
                             <% if (!isAdmin) { %>
 
-    <!-- CUSTOMER PURCHASE BUTTONS -->
-    <div class="grid grid-cols-2 gap-3 mt-auto">
+                                <div class="grid grid-cols-2 gap-3 mt-auto">
 
-        <!-- ADD TO CART -->
-        <button
-            type="button"
-            class="add-to-cart-btn"
-            data-id="<%= bookId %>"
-            data-title="<%= book.title %>"
-            data-author="<%= book.author %>"
-            data-price="<%= book.price %>"
-            data-image="<%= book.image %>">
+                                    <button
+                                        type="button"
+                                        class="add-to-cart-btn"
+                                        data-id="<%= bookId %>"
+                                        data-title="<%= book.title %>"
+                                        data-author="<%= book.author %>"
+                                        data-price="<%= book.price %>"
+                                        data-image="<%= book.image %>">
 
-            🛒 Add to Cart
-        </button>
+                                        Add to Cart
 
-        <!-- BUY NOW -->
-        <button
-            type="button"
-            class="buy-now-btn"
-            data-id="<%= bookId %>"
-            data-title="<%= book.title %>"
-            data-author="<%= book.author %>"
-            data-price="<%= book.price %>"
-            data-image="<%= book.image %>">
+                                    </button>
 
-            Buy Now →
-        </button>
+                                    <button
+                                        type="button"
+                                        class="buy-now-btn"
+                                        data-id="<%= bookId %>"
+                                        data-title="<%= book.title %>"
+                                        data-author="<%= book.author %>"
+                                        data-price="<%= book.price %>"
+                                        data-image="<%= book.image %>">
 
-    </div>
+                                        Buy Now
 
-<% } %>
+                                    </button>
+
+                                </div>
+
+                            <% } %>
 
                             <!-- ADMIN EDIT / DELETE -->
 
                             <% if (isAdmin && book._id) { %>
 
                                 <div class="flex flex-wrap gap-3 mt-5 pt-4 border-t border-[#F2E3E5]">
-
-                                    <!-- EDIT BUTTON -->
 
                                     <a
                                         href="/books/edit/<%= book._id %>"
@@ -544,9 +492,6 @@
                                         Edit
 
                                     </a>
-
-
-                                    <!-- DELETE BUTTON -->
 
                                     <form
                                         action="/books/delete/<%= book._id %>"
@@ -579,17 +524,14 @@
 
     </section>
 
-
     <!-- FOOTER -->
 
     <%- include('includes/footer.ejs') %>
-
 
     <!-- CART JAVASCRIPT -->
 
     <script>
 
-        // Get the cart from localStorage.
         function getCart() {
             try {
                 return JSON.parse(localStorage.getItem("bloomReadsCart")) || [];
@@ -598,15 +540,11 @@
             }
         }
 
-
-        // Save the cart.
         function saveCart(cart) {
             localStorage.setItem("bloomReadsCart", JSON.stringify(cart));
             updateCartCounter();
         }
 
-
-        // Update the navbar cart counter if it exists.
         function updateCartCounter() {
 
             const cart = getCart();
@@ -623,8 +561,6 @@
             }
         }
 
-
-        // Add a book to the cart.
         function addBookToCart(button) {
 
             const id = button.dataset.id;
@@ -632,7 +568,7 @@
 
             if (!id || !Number.isFinite(price) || price < 0) {
                 alert("Sorry, this book could not be added.");
-                return;
+                return null;
             }
 
             const book = {
@@ -661,8 +597,6 @@
             return book;
         }
 
-
-        // Show a message on the page.
         function showCartMessage(message) {
 
             const messageBox = document.getElementById("cartMessage");
@@ -682,8 +616,8 @@
             }, 3000);
         }
 
+        // Add to Cart
 
-        // Add to Cart button.
         document.querySelectorAll(".add-to-cart-btn").forEach(function (button) {
 
             button.addEventListener("click", function () {
@@ -691,17 +625,15 @@
                 const book = addBookToCart(button);
 
                 if (book) {
-                    showCartMessage(
-                        "✓ " + book.title + " added to your cart!"
-                    );
+                    showCartMessage(book.title + " added to your cart!");
                 }
 
             });
 
         });
 
+        // Buy Now
 
-        // Buy Now button.
         document.querySelectorAll(".buy-now-btn").forEach(function (button) {
 
             button.addEventListener("click", function () {
@@ -716,8 +648,6 @@
 
         });
 
-
-        // Set the counter when the page loads.
         updateCartCounter();
 
     </script>

@@ -96,18 +96,6 @@
             font-weight: 700;
         }
 
-        .brand-symbol {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            background: #450920;
-            color: white;
-            font-size: 23px;
-        }
-
         .welcome-heading {
             margin-top: 65px;
             font-size: clamp(36px, 4vw, 53px);
@@ -292,7 +280,7 @@
 
 <body>
 
-    <!-- NAVBAR: unchanged -->
+    <!-- NAVBAR -->
     <%- include('includes/nav.ejs') %>
 
 
@@ -309,7 +297,6 @@
                 <div class="welcome-content">
 
                     <div class="brand-name">
-                        <span class="brand-symbol">✿</span>
                         <span>Bloom Reads</span>
                     </div>
 
@@ -329,7 +316,7 @@
                         organised.
                     </p>
 
-                    <!-- Image with fallback -->
+                    <!-- IMAGE -->
 
                     <img
                         src="/uploads/reading-corner.png"
@@ -339,14 +326,13 @@
                     >
 
                     <div id="loginImageFallback" class="image-fallback">
-                        <span class="text-5xl">📚</span>
                         <p class="heading text-xl">A World of Stories</p>
                     </div>
 
                 </div>
 
                 <div class="welcome-bottom">
-                    Made for readers, managed with care. ♡
+                    Made for readers, managed with care.
                 </div>
 
             </section>
@@ -371,7 +357,7 @@
                     </p>
 
 
-                    <!-- LOGIN FORM: original functionality preserved -->
+                    <!-- LOGIN FORM -->
 
                     <form action="/admin/login"
                           method="post"
@@ -422,7 +408,7 @@
                         <!-- SUBMIT BUTTON -->
 
                         <button type="submit" class="login-button">
-                            Login to Dashboard →
+                            Login to Dashboard
                         </button>
 
                     </form>
@@ -437,10 +423,10 @@
                     </div>
 
 
-                    <!-- RETURN LINK: unchanged -->
+                    <!-- RETURN LINK -->
 
                     <a href="/books" class="return-link">
-                        ← Back to the Bookstore
+                        Back to the Bookstore
                     </a>
 
                 </div>
@@ -452,7 +438,7 @@
     </main>
 
 
-    <!-- FOOTER: unchanged -->
+    <!-- FOOTER -->
     <%- include('includes/footer.ejs') %>
 
 </body>
